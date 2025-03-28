@@ -95,7 +95,7 @@ public class CompCoCommand extends SequentialCommandGroup{
                         () -> s_Elevator.atCompPose()
                     ),
 
-                    () -> s_Sensor.algaeSensed()
+                    () -> s_Sensor.bottomAlgaeSensed()
                 )
             ).until(() -> endCommand)
 

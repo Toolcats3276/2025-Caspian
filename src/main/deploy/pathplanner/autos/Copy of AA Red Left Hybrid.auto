@@ -5,9 +5,15 @@
     "data": {
       "commands": [
         {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "AA Left Hybrid 1"
+                }
+              },
               {
                 "type": "sequential",
                 "data": {
@@ -37,12 +43,6 @@
                       }
                     }
                   ]
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "AA Left Hybrid 1"
                 }
               }
             ]
@@ -148,15 +148,9 @@
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "Comp"
-                }
-              },
-              {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.0
+                  "waitTime": 0.3
                 }
               }
             ]

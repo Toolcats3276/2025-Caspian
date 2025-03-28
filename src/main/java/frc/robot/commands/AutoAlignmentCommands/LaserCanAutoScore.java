@@ -18,7 +18,7 @@ public class LaserCanAutoScore extends SequentialCommandGroup {
 
       new SequentialCommandGroup(
         new LaserCanAlignmentCommand(s_Swerve, s_Sensor, strafeLeft),
-        new WaitCommand(0.1),
+        // new WaitCommand(0.1),
         new ShootCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor)
       )
 

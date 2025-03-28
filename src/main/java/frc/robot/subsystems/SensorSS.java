@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import au.grapplerobotics.interfaces.LaserCanInterface.Measurement;
 import au.grapplerobotics.interfaces.LaserCanInterface.RegionOfInterest;
 import au.grapplerobotics.interfaces.LaserCanInterface.TimingBudget;
 import au.grapplerobotics.ConfigurationFailedException;
@@ -11,24 +12,22 @@ import frc.robot.Constants.InfeedConstants;
 
 public class SensorSS extends SubsystemBase{
 
-    private LaserCan m_algaeLaserCAN;
+    private LaserCan m_topLaserCAN;
+    private LaserCan m_bottomLaserCAN;
+    
+    private LaserCan m_coralLaserCAN;
+
+    LaserCan.Measurement topLaserCANMeasurment;
+    LaserCan.Measurement bottomLaserMeasurment;
+    
+    LaserCan.Measurement coralLaserMeasurement;
 
     private Debouncer algaeDebouncer;
     private Debouncer algaeInfeedDelay;
 
-    private LaserCan m_coralLaserCAN;
-
-    private LaserCan m_leftReefLaserCAN;
-    private LaserCan m_rightReefLaserCAN;
-
-    LaserCan.Measurement leftReefMeasurement;
-    LaserCan.Measurement rightReefMeasurement;
-
     private Debouncer coralDebouncer;
     private Debouncer coralSourceInfeedDelay;
 
-    LaserCan.Measurement coralLaserMeasurement;
-    LaserCan.Measurement algaeLaserMeasurment;
 
     private boolean endCommand = false;
 
@@ -40,25 +39,18 @@ public class SensorSS extends SubsystemBase{
         
 
     public SensorSS(){
-        m_algaeLaserCAN = new LaserCan(2);
-        try {
-            m_algaeLaserCAN.setRegionOfInterest(new RegionOfInterest(8, 8, 4, 4));
-        } catch (ConfigurationFailedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        try {
-            m_algaeLaserCAN.setTimingBudget(TimingBudget.TIMING_BUDGET_100MS);
-        } catch (ConfigurationFailedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        algaeLaserMeasurment = m_algaeLaserCAN.getMeasurement();
-
-        algaeDebouncer = new Debouncer(0.1);
-        algaeInfeedDelay = new Debouncer(3);
-        // algaeInfeedL1Delay = new Debouncer(3);
+        // try {
+        //     m_bottomLaserCAN.setRegionOfInterest(new RegionOfInterest(8, 8, 4, 4));
+        // } catch (ConfigurationFailedException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
+        // try {
+        //     m_bottomLaserCAN.setTimingBudget(TimingBudget.TIMING_BUDGET_100MS);
+        // } catch (ConfigurationFailedException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
 
         m_coralLaserCAN = new LaserCan(1);
         coralLaserMeasurement = m_coralLaserCAN.getMeasurement();
@@ -67,29 +59,23 @@ public class SensorSS extends SubsystemBase{
         coralSourceInfeedDelay = new Debouncer(0.5);
 
 
-        m_leftReefLaserCAN = new LaserCan(3);
-        m_rightReefLaserCAN = new LaserCan(4);
+        m_topLaserCAN = new LaserCan(2);
+        topLaserCANMeasurment = m_topLaserCAN.getMeasurement();
 
-        leftReefMeasurement = m_leftReefLaserCAN.getMeasurement();
-        rightReefMeasurement = m_rightReefLaserCAN.getMeasurement();
+        m_bottomLaserCAN = new LaserCan(3);
+        bottomLaserMeasurment = m_bottomLaserCAN.getMeasurement();
+
+        algaeDebouncer = new Debouncer(0.1);
+        algaeInfeedDelay = new Debouncer(3);
         
     }
 
     @Override
     public void periodic() {
-            algaeLaserMeasurment = m_algaeLaserCAN.getMeasurement();
-            coralLaserMeasurement = m_coralLaserCAN.getMeasurement();
+        topLaserCANMeasurment = m_topLaserCAN.getMeasurement();
+        bottomLaserMeasurment = m_bottomLaserCAN.getMeasurement();
 
-            leftReefMeasurement = m_leftReefLaserCAN.getMeasurement();
-            rightReefMeasurement = m_rightReefLaserCAN.getMeasurement();
-    
-
-        if(algaeLaserMeasurment != null){
-            SmartDashboard.putNumber("algaeMeasurement", algaeLaserMeasurment.distance_mm);
-        }
-        else{
-            SmartDashboard.putNumber("algaeMeasurement", -1);
-        }
+        coralLaserMeasurement = m_coralLaserCAN.getMeasurement();
    
         if(coralLaserMeasurement != null){
             SmartDashboard.putNumber("coralMeasurement", coralLaserMeasurement.distance_mm);
@@ -98,46 +84,30 @@ public class SensorSS extends SubsystemBase{
             SmartDashboard.putNumber("coralMeasurement", -1);
         }
 
-        SmartDashboard.putBoolean("Algae In Range", algaeSensed());
-        SmartDashboard.putBoolean("Coral In Range", coralSensed());
-        SmartDashboard.putBoolean("Infeed State", infeedState);
-        SmartDashboard.putString("Algae Infeed State", getAlgaeInfeedState());
+        SmartDashboard.putBoolean("Top Algae Sensed", topAlgaeSensed());
+        SmartDashboard.putBoolean("Bottom Algae Sensed", bottomAlgaeSensed());
 
-        SmartDashboard.putBoolean("AlgaeReefSensed", algaeReefSensed());
-        SmartDashboard.putBoolean("ReefSensed", reefSensed());
+        SmartDashboard.putBoolean("Coral Sensed", coralSensed());
 
-        SmartDashboard.putNumber("Algae Ambient", algaeLaserMeasurment.ambient);
-        SmartDashboard.putNumber("Algae Status", algaeLaserMeasurment.status);
-        SmartDashboard.putBoolean("Valid Algae", validAlgaeMeasurment());
+        SmartDashboard.putBoolean("Reef Sensed", reefSensed());
 
-        SmartDashboard.putNumber("Left Ambient", leftReefMeasurement.ambient);
-        SmartDashboard.putNumber("Left Status", leftReefMeasurement.status);
-        SmartDashboard.putBoolean("Valid Left", validLeftReefMeasurment());
+        SmartDashboard.putNumber("Top Measurment", topLaserCANMeasurment.distance_mm);
+        SmartDashboard.putNumber("Top Ambient", topLaserCANMeasurment.ambient);
+        SmartDashboard.putNumber("Top Status", topLaserCANMeasurment.status);
+        SmartDashboard.putBoolean("Valid Top", validTopMeasurment());
 
-        SmartDashboard.putNumber("Right Ambient", rightReefMeasurement.ambient);
-        SmartDashboard.putNumber("Right Status", rightReefMeasurement.status);
-        SmartDashboard.putBoolean("Valid Right", validRightReefMeasurment());
+        SmartDashboard.putNumber("Bottom Measurment", bottomLaserMeasurment.distance_mm);
+        SmartDashboard.putNumber("Bottom Ambient", bottomLaserMeasurment.ambient);
+        SmartDashboard.putNumber("Bottom Status", bottomLaserMeasurment.status);
+        SmartDashboard.putBoolean("Valid Bottom", validTopMeasurment());
+        
 
-        SmartDashboard.putNumber("LeftReef", leftReefMeasurement.distance_mm);
-        SmartDashboard.putNumber("RightReef", rightReefMeasurement.distance_mm);
 
     }
 
-
-    public boolean algaeSensed(){
+    public boolean topAlgaeSensed(){
         boolean algaeInRange;
-        if(algaeLaserMeasurment.distance_mm > 0.00000001 && algaeLaserMeasurment.distance_mm < 100){
-            algaeInRange = true;
-        }
-        else{
-            algaeInRange = false;
-        }
-        return algaeDebouncer.calculate(algaeInRange);
-    }
-
-    public boolean algaeReefSensed(){
-        boolean algaeInRange;
-        if(algaeLaserMeasurment.distance_mm < 200 && validAlgaeMeasurment()){
+        if(topLaserCANMeasurment.distance_mm < 100 && validBottomMeasurment()){
             algaeInRange = true;
         }
         else{
@@ -146,26 +116,38 @@ public class SensorSS extends SubsystemBase{
         return algaeInRange;
     }
 
+    public boolean bottomAlgaeSensed(){
+        boolean algaeInRange;
+        if(bottomLaserMeasurment.distance_mm < 100 && validBottomMeasurment()){
+            algaeInRange = true;
+        }
+        else{
+            algaeInRange = false;
+        }
+        return algaeInRange;
+    }
+
+
     public boolean reefSensed(){
-        boolean leftRange;
-        boolean rightRange;
+        boolean topRange;
+        boolean bottomRange;
         boolean inRange;
 
-        if(leftReefMeasurement.distance_mm < 270 && validLeftReefMeasurment()){
-            leftRange = true;
+        if(topLaserCANMeasurment.distance_mm < 500 && validTopMeasurment()){
+            topRange = true;
         }
         else{
-            leftRange = false;
+            topRange = false;
         }
 
-        if(rightReefMeasurement.distance_mm < 270 && validRightReefMeasurment()){
-            rightRange = true;
+        if(bottomLaserMeasurment.distance_mm < 500 && validBottomMeasurment()){
+            bottomRange = true;
         }
         else{
-            rightRange = false;
+            bottomRange = false;
         }
 
-        if(rightRange && leftRange){
+        if(bottomRange && topRange){
             inRange = true;
         }
         else{
@@ -175,10 +157,9 @@ public class SensorSS extends SubsystemBase{
         return inRange;
     }
 
-
     
     public boolean algaeInfeedDelay(){
-        return algaeInfeedDelay.calculate(algaeSensed());
+        return algaeInfeedDelay.calculate(bottomAlgaeSensed());
     }
 
     public boolean coralSensed(){
@@ -193,38 +174,41 @@ public class SensorSS extends SubsystemBase{
     }
 
 
-    private boolean validAlgaeMeasurment(){
-        boolean validAlgaeMeasurment;
-        if(algaeLaserMeasurment.ambient >= 300 && algaeLaserMeasurment.status != LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT){
-            validAlgaeMeasurment = false;
+    private boolean validTopMeasurment(){
+        boolean validMeasurment;
+        if(topLaserCANMeasurment.ambient >= 270 && topLaserCANMeasurment.status != LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT){
+            validMeasurment = false;
         }
         else{
-            validAlgaeMeasurment = true;
+            validMeasurment = true;
         }
 
-        return validAlgaeMeasurment;
+        return validMeasurment;
     }
-    private boolean validLeftReefMeasurment(){
-        boolean validAlgaeMeasurment;
-        if(leftReefMeasurement.ambient >= 300 && leftReefMeasurement.status != LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT){
-            validAlgaeMeasurment = false;
+
+    private boolean validBottomMeasurment(){
+        boolean validMeasurment;
+        if(bottomLaserMeasurment.ambient >= 270 && bottomLaserMeasurment.status != LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT){
+            validMeasurment = false;
         }
         else{
-            validAlgaeMeasurment = true;
+            validMeasurment = true;
         }
 
-        return validAlgaeMeasurment;
+        return validMeasurment;
     }
-    private boolean validRightReefMeasurment(){
-        boolean validAlgaeMeasurment;
-        if(rightReefMeasurement.ambient >= 300 && rightReefMeasurement.status != LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT){
-            validAlgaeMeasurment = false;
+
+
+    private boolean validMeasurment(Measurement laserCANMeasurment){
+        boolean validMeasurment;
+        if(laserCANMeasurment.ambient >= 300 && laserCANMeasurment.status != LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT){
+            validMeasurment = false;
         }
         else{
-            validAlgaeMeasurment = true;
+            validMeasurment = true;
         }
 
-        return validAlgaeMeasurment;
+        return validMeasurment;
     }
 
 

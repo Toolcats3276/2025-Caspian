@@ -23,7 +23,7 @@ public class L2ToggleCoCommand extends SequentialCommandGroup{
                         new L2FrontCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed)
                     ),
 
-                    () -> s_Arm.returnSetPoint() == ArmConstants.L2_INVERSE
+                    () -> s_Arm.returnSetPoint() == ArmConstants.L2_Front
             )
         );
         addRequirements(s_Wrist, s_Arm, s_Elevator, s_Infeed);

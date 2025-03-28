@@ -161,6 +161,12 @@
           "data": {
             "commands": [
               {
+                "type": "named",
+                "data": {
+                  "name": "Infeed"
+                }
+              },
+              {
                 "type": "sequential",
                 "data": {
                   "commands": [
@@ -177,12 +183,6 @@
                       }
                     }
                   ]
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Infeed"
                 }
               }
             ]

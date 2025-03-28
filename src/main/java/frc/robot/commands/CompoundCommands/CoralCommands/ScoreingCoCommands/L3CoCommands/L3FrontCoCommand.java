@@ -21,14 +21,14 @@ public class L3FrontCoCommand extends SequentialCommandGroup{
 
         addCommands(
             new ParallelCommandGroup(
-                new ArmPIDCommand(s_Arm, ArmConstants.L3_INVERSE, ArmConstants.MAX_PID_OUTPUT),
+                new ArmPIDCommand(s_Arm, ArmConstants.L3_Front, ArmConstants.MAX_PID_OUTPUT),
                 // new SequentialCommandGroup(
                 //     new WaitCommand(0.15),
-                //     new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L3_INVERSE),
-                //     new WristPIDCommand(s_Wrist, WristConstants.L3_INVERSE, WristConstants.MAX_PID_OUTPUT)
+                //     new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L3_Front),
+                //     new WristPIDCommand(s_Wrist, WristConstants.L3_Front, WristConstants.MAX_PID_OUTPUT)
                 // ),
-                new WristPIDCommand(s_Wrist, WristConstants.L3_INVERSE, WristConstants.MAX_PID_OUTPUT),
-                new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L3_INVERSE, ElevatorConstants.MAX_PID_OUTPUT),
+                new WristPIDCommand(s_Wrist, WristConstants.L3_Front, WristConstants.MAX_PID_OUTPUT),
+                new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L3_Front, ElevatorConstants.MAX_PID_OUTPUT),
                 new InfeedCommand(s_Infeed, 0, 0)
             )
         );

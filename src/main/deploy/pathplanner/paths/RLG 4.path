@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.043,
-        "y": 7.428
+        "x": 1.1,
+        "y": 3.879
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7684970475895623,
-        "y": 6.7805601195168865
+        "x": 2.1098360655737705,
+        "y": 4.75625
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.607,
-        "y": 5.049
+        "x": 1.043,
+        "y": 7.428
       },
       "prevControl": {
-        "x": 3.0306550399414425,
-        "y": 5.573341631040015
+        "x": 1.622516555291687,
+        "y": 6.658955556256869
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,17 +30,17 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.22987551867219705,
+      "waypointRelativePos": 0.5,
       "rotationDegrees": 127.00000000000001
     }
   ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.6263027295285362,
+      "minWaypointRelativePos": 0.8480756245779798,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 2.5,
+        "maxVelocity": 2.0,
         "maxAcceleration": 1.5,
         "maxAngularVelocity": 572.958,
         "maxAngularAcceleration": 1313.0,
@@ -52,8 +52,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.15,
-    "maxAcceleration": 4.4,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 572.958,
     "maxAngularAcceleration": 1313.0,
     "nominalVoltage": 12.0,
@@ -61,13 +61,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 119.99999999999999
-  },
-  "reversed": false,
-  "folder": "AA Red Left Hybrid",
-  "idealStartingState": {
-    "velocity": 0,
     "rotation": 127.00000000000001
   },
-  "useDefaultConstraints": true
+  "reversed": false,
+  "folder": "AAS RLGS",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": false
 }

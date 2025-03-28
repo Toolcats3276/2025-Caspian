@@ -47,7 +47,7 @@ public class AlgaeInfeedL1BackSensorCoCommand extends SequentialCommandGroup{
                             // new InstantCommand(() -> s_Sensor.setAlgaeInfeedState(InfeedConstants.ALGAE_INFEED_L2))
                         ),
                     //condition 
-                        () -> s_Sensor.algaeSensed()
+                        () -> s_Sensor.bottomAlgaeSensed()
                 )
             )
 

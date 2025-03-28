@@ -47,27 +47,27 @@ public final class Constants {
 
 
         public static final double ALGAE_INFEED = 0.425;//.425
-        public static final double ALGAE_INFEED_L1_Inverse = .53;
+        public static final double ALGAE_INFEED_L1_Front = .53;
         public static final double ALGAE_INFEED_L1 = .586;
         public static final double ALGAE_INFEED_L2 = .586;
-        public static final double ALGAE_INFEED_L2_Inverse = .531;//.531
+        public static final double ALGAE_INFEED_L2_Front = .531;//.531
         public static final double ALGAE_INFEED_L2_COMP = .46;
 
         //Reef
         public static final double L1 = 0.58;
-        // public static final double L1_INVERSE = 0.422;
-        public static final double L1_INVERSE = 0.40;
+        // public static final double L1_Front = 0.422;
+        public static final double L1_Front = 0.40;
 
         public static final double L2 = 0.571;
-        public static final double L2_INVERSE = 0.447;
+        public static final double L2_Front = 0.447;
 
         public static final double L3 = 0.5831;
-        public static final double L3_INVERSE = 0.497;
+        public static final double L3_Front = 0.497;
 
         // public static final double L4 = 0.583;
         public static final double L4 = 0.58;//.583 //0.577
-        public static final double L4_INVERSE = 0.535;//.53
-        // public static final double L4_INVERSE = 0.539;
+        public static final double L4_Front = 0.535;//.53
+        // public static final double L4_Front = 0.539;
 
         //Barge
         public static final double BARGE = 0.59;
@@ -109,25 +109,25 @@ public final class Constants {
 
         public static final double ALGAE_INFEED = 0.285;//.4
         public static final double ALGAE_INFEED_L1 = 0.73;//0.72
-        public static final double ALGAE_INFEED_L1_Inverse = 0.215;
+        public static final double ALGAE_INFEED_L1_Front = 0.215;
         public static final double ALGAE_INFEED_L2 = .72;
-        public static final double ALGAE_INFEED_L2_Inverse = .23;
+        public static final double ALGAE_INFEED_L2_Front = .23;
 
         //Reef
         public static final double L1 = 0.78;
-        // public static final double L1_INVERSE = 0.426;
-        public static final double L1_INVERSE = 0.779;
+        // public static final double L1_Front = 0.426;
+        public static final double L1_Front = 0.779;
 
         public static final double L2 = 0.773;
-        public static final double L2_INVERSE = 0.72;
+        public static final double L2_Front = 0.72;
 
         public static final double L3 = 0.773;
-        public static final double L3_INVERSE = 0.666;
+        public static final double L3_Front = 0.666;
 
         public static final double L4 = 0.79;//.77
         public static final double L4_FLIP_BACK = 0.6;
-        public static final double L4_INVERSE = 0.558;//.581
-        // public static final double L4_INVERSE = 0.569;
+        public static final double L4_Front = 0.558;//.581
+        // public static final double L4_Front = 0.569;
 
         //Barge
         public static final double BARGE = 0.495;// 0.48 .5
@@ -154,23 +154,23 @@ public final class Constants {
 
         //Infeed
         public static final double ALGAE_INFEED_Ground = 0.863;
-        public static final double ALGAE_INFEED_L1_Inverse = 4.425;//4.5 high 4.3 low
+        public static final double ALGAE_INFEED_L1_Front = 4.425;//4.5 high 4.3 low
         public static final double ALGAE_INFEED_L1 = 1.25;//1.55
         public static final double ALGAE_INFEED_L2 = 5.5;//5.6
-        public static final double ALGAE_INFEED_L2_Inverse = 8.4;//8.3
+        public static final double ALGAE_INFEED_L2_Front = 8.4;//8.3
 
         //Reef
         public static final double L1 = 0.1;
-        public static final double L1_INVERSE = 0.5;
+        public static final double L1_Front = 0.5;
 
-        public static final double L2 = 0.2; //0.25;
-        public static final double L2_INVERSE = 1.26;
+        public static final double L2 = 0.15; //0.25;
+        public static final double L2_Front = 1.26;
 
         public static final double L3 = 4.45; //0.45
-        public static final double L3_INVERSE = 4.65;
+        public static final double L3_Front = 4.65;
 
-        public static final double L4 = 10.55;
-        public static final double L4_INVERSE = 10.4;
+        public static final double L4 = 10.55; // 10.55
+        public static final double L4_Front = 10.4; // 10.4S
 
         //Barge
         public static final double BARGE = 10.4;
@@ -183,7 +183,7 @@ public final class Constants {
         
         // public static final double MAX_PID_OUTPUT = .2; 
         // public static final double MAX_PID_OUTPUT = 1; 
-        public static final double MAX_PID_OUTPUT = .75; 
+        public static final double MAX_PID_OUTPUT = .95; 
         public static final double Elevator_Test_PID_OUTPUT = .85;
     }
 
@@ -206,7 +206,7 @@ public final class Constants {
         public static final double IDLE_ALGAE_VOLTAGE = 1;
 
         public static final double CORAL_SHOT = 0.65;
-        public static final double PROCESSOR_SHOT = 0.25;
+        public static final double PROCESSOR_SHOT = 0.15;
 
         public static final String ALGAE_INFEED_GROUND = "Ground Infeed";
         public static final String ALGAE_INFEED_L1 = "L1 Infeed";

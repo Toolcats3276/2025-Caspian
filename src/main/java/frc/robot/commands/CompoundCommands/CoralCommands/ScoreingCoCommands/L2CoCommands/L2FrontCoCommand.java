@@ -21,9 +21,9 @@ public class L2FrontCoCommand extends SequentialCommandGroup{
 
         addCommands(
             new ParallelCommandGroup(
-                new ArmPIDCommand(s_Arm, ArmConstants.L2_INVERSE, ArmConstants.MAX_PID_OUTPUT),
-                new WristPIDCommand(s_Wrist, WristConstants.L2_INVERSE, WristConstants.MAX_PID_OUTPUT),
-                new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L2_INVERSE, ElevatorConstants.MAX_PID_OUTPUT),
+                new ArmPIDCommand(s_Arm, ArmConstants.L2_Front, ArmConstants.MAX_PID_OUTPUT),
+                new WristPIDCommand(s_Wrist, WristConstants.L2_Front, WristConstants.MAX_PID_OUTPUT),
+                new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L2_Front, ElevatorConstants.MAX_PID_OUTPUT),
                 new InfeedCommand(s_Infeed, 0, 0)
             )
         );

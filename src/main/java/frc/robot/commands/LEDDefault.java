@@ -29,7 +29,7 @@ public class LEDDefault extends Command {
   @Override
   public void execute() {
 
-    if (s_Sensor.algaeSensed()) {
+    if (s_Sensor.bottomAlgaeSensed()) {
       s_Led.Infeed_Done();
     }
 
@@ -46,7 +46,7 @@ public class LEDDefault extends Command {
       s_Led.CoralSensed();
     }
 
-    else if (s_Arm.returnSetPoint() == ArmConstants.COMP && s_Sensor.algaeSensed()) {
+    else if (s_Arm.returnSetPoint() == ArmConstants.COMP && s_Sensor.bottomAlgaeSensed()) {
       s_Led.AlgaeSensed();
     }
 
@@ -56,9 +56,9 @@ public class LEDDefault extends Command {
 
     else if (s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED || 
              s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED_L1 || 
-             s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED_L1_Inverse || 
+             s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED_L1_Front || 
              s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED_L2 || 
-             s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED_L2_Inverse) {
+             s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED_L2_Front) {
       s_Led.Infeeding();
     }
 

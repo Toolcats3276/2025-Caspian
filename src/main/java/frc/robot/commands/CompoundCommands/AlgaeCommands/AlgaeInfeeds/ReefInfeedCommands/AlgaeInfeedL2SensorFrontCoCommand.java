@@ -42,14 +42,14 @@ public class AlgaeInfeedL2SensorFrontCoCommand extends SequentialCommandGroup{
                     //on false
                         new ParallelCommandGroup(
                             new InstantCommand(() -> endCommand = false),
-                            new ArmPIDCommand(s_Arm, ArmConstants.ALGAE_INFEED_L2_Inverse, ArmConstants.MAX_PID_OUTPUT),
-                            new WristPIDCommand(s_Wrist, WristConstants.ALGAE_INFEED_L2_Inverse, WristConstants.MAX_PID_OUTPUT),
-                            new ElevatorPIDCommand(s_Elevator, ElevatorConstants.ALGAE_INFEED_L2_Inverse, ElevatorConstants.MAX_PID_OUTPUT),
+                            new ArmPIDCommand(s_Arm, ArmConstants.ALGAE_INFEED_L2_Front, ArmConstants.MAX_PID_OUTPUT),
+                            new WristPIDCommand(s_Wrist, WristConstants.ALGAE_INFEED_L2_Front, WristConstants.MAX_PID_OUTPUT),
+                            new ElevatorPIDCommand(s_Elevator, ElevatorConstants.ALGAE_INFEED_L2_Front, ElevatorConstants.MAX_PID_OUTPUT),
                             new InfeedCommand(s_Infeed, InfeedConstants.ALGAE_INFEED, InfeedConstants.ALGAE_INFEED)
                             // new InstantCommand(() -> s_Sensor.setAlgaeInfeedState(InfeedConstants.ALGAE_INFEED_L2))
                         ),
                     //condition 
-                        () -> s_Sensor.algaeSensed()
+                        () -> s_Sensor.bottomAlgaeSensed()
                 )
             ).until(() -> endCommand)
 

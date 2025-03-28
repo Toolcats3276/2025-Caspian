@@ -3,45 +3,40 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.6075,
-        "y": 5.049
+        "x": 0.741,
+        "y": 5.84
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.6622500000000002,
-        "y": 5.6155
+        "x": 1.174795081967213,
+        "y": 4.75625
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.712,
-        "y": 6.024
+        "x": 0.32,
+        "y": 4.06
       },
       "prevControl": {
-        "x": 2.08675,
-        "y": 5.751
+        "x": 3.1168032786885242,
+        "y": 3.917110655737705
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.6248962655601685,
-      "rotationDegrees": 170.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.8307692307692307,
-      "maxWaypointRelativePos": 0.8764267990074442,
+      "minWaypointRelativePos": 0.84,
+      "maxWaypointRelativePos": 0.89,
       "constraints": {
-        "maxVelocity": 0.1,
-        "maxAcceleration": 0.1,
+        "maxVelocity": 0.5,
+        "maxAcceleration": 0.5,
         "maxAngularVelocity": 572.958,
         "maxAngularAcceleration": 1313.0,
         "nominalVoltage": 12.0,
@@ -50,11 +45,24 @@
     },
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.6560794044665114,
-      "maxWaypointRelativePos": 0.8764267990074471,
+      "minWaypointRelativePos": 0.9,
+      "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 2.5,
-        "maxAcceleration": 1.5,
+        "maxVelocity": 2.0,
+        "maxAcceleration": 1.0,
+        "maxAngularVelocity": 572.958,
+        "maxAngularAcceleration": 1313.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    },
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 0.8777852802160507,
+      "constraints": {
+        "maxVelocity": 4.15,
+        "maxAcceleration": 4.4,
         "maxAngularVelocity": 572.958,
         "maxAngularAcceleration": 1313.0,
         "nominalVoltage": 12.0,
@@ -65,8 +73,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.0,
-    "maxAcceleration": 1.5,
+    "maxVelocity": 4.15,
+    "maxAcceleration": 4.4,
     "maxAngularVelocity": 572.958,
     "maxAngularAcceleration": 1313.0,
     "nominalVoltage": 12.0,
@@ -74,13 +82,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 170.0
+    "rotation": 180.0
   },
   "reversed": false,
-  "folder": "AA Red Left Hybrid",
+  "folder": "AAS RLGS",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 119.99999999999999
+    "rotation": -171.16
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

@@ -21,12 +21,12 @@
 
 //         addCommands(
 //             new ParallelCommandGroup(
-//                 new ArmPIDCommand(s_Arm, ArmConstants.L4_INVERSE),
-//                 new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L4_INVERSE),
+//                 new ArmPIDCommand(s_Arm, ArmConstants.L4_Front),
+//                 new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L4_Front),
 //                 new InfeedCommand(s_Infeed, 0),
 //                 new SequentialCommandGroup(
 //                     new WaitCommand(1.25),
-//                     new WristPIDCommand(s_Wrist, WristConstants.L4_INVERSE)
+//                     new WristPIDCommand(s_Wrist, WristConstants.L4_Front)
 //                 )
 //             ),
 //             new WaitCommand(0.5),
@@ -109,15 +109,15 @@ public class L4FrontCoCommand extends SequentialCommandGroup{
 
         addCommands(
             new ParallelCommandGroup(
-                new ArmPIDCommand(s_Arm, ArmConstants.L4_INVERSE, ArmConstants.MAX_PID_OUTPUT),
+                new ArmPIDCommand(s_Arm, ArmConstants.L4_Front, ArmConstants.MAX_PID_OUTPUT),
                 // new SequentialCommandGroup(
                 //     new WaitCommand(0.15),
-                //     new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L4_INVERSE),
+                //     new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L4_Front),
                 //     new WaitCommand(0.45),
-                //     new WristPIDCommand(s_Wrist, WristConstants.L4_INVERSE, WristConstants.MAX_PID_OUTPUT)
+                //     new WristPIDCommand(s_Wrist, WristConstants.L4_Front, WristConstants.MAX_PID_OUTPUT)
                 // ),
-                new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L4_INVERSE, ElevatorConstants.MAX_PID_OUTPUT),
-                new WristPIDCommand(s_Wrist, WristConstants.L4_INVERSE, WristConstants.MAX_PID_OUTPUT),
+                new ElevatorPIDCommand(s_Elevator, ElevatorConstants.L4_Front, ElevatorConstants.MAX_PID_OUTPUT),
+                new WristPIDCommand(s_Wrist, WristConstants.L4_Front, WristConstants.MAX_PID_OUTPUT),
                 new InfeedCommand(s_Infeed, 0, 0)
             )
         );

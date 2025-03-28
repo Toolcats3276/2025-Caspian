@@ -23,7 +23,7 @@ public class L3ToggleCoCommand extends SequentialCommandGroup{
                         new L3FrontCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed)
                     ),
 
-                    () -> s_Arm.returnSetPoint() == ArmConstants.L3_INVERSE
+                    () -> s_Arm.returnSetPoint() == ArmConstants.L3_Front
                 )
         );
         addRequirements(s_Wrist, s_Arm, s_Elevator, s_Infeed);

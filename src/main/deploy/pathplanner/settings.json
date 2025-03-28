@@ -10,13 +10,16 @@
     "LeftWall",
     "Mid Left Ground",
     "Mid Right Ground",
+    "AAS RLGS",
     "Red Left Ground",
     "Right Ground",
     "Right Source"
   ],
   "autoFolders": [
     "Blue Ground",
+    "Smart Blue",
     "Red Ground",
+    "Smart Red",
     "Source",
     "Tests"
   ],

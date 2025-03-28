@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.2204999999999995,
-        "y": 7.104500000000001
+        "x": 6.47052302014486,
+        "y": 6.384733478376806
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 5.08
       },
       "prevControl": {
-        "x": 5.476749999999999,
-        "y": 5.616749999999999
+        "x": 5.283904854473435,
+        "y": 5.268772875911881
       },
       "nextControl": null,
       "isLocked": false,
@@ -67,7 +67,7 @@
   "folder": "AA Red Left Hybrid",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -90.0
   },
   "useDefaultConstraints": false
 }

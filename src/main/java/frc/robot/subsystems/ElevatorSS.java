@@ -79,7 +79,7 @@ public class ElevatorSS extends SubsystemBase{
                 break;
 
             case Manual:
-                output = MathUtil.clamp(ManualVal, -0.1, 0.1);
+                output = MathUtil.clamp(ManualVal, -0.25, 0.25);
                 m_leadElevatorMotor.set(output);
                 break;
 
@@ -95,6 +95,7 @@ public class ElevatorSS extends SubsystemBase{
 
         SmartDashboard.putBoolean("Elevator at SetPoint", atCompPose());
         SmartDashboard.putNumber("Elevator Setpoint", setpoint);
+
     }
 
     public void Stop(){

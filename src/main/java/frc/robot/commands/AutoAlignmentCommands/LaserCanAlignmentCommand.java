@@ -35,12 +35,12 @@ public class LaserCanAlignmentCommand extends Command {
 
     else if(strafeLeft){
       translationVal = 0;
-      strafeVal = -0.4;
+      strafeVal = -0.35;
     }
 
     else{
       translationVal = 0;
-      strafeVal = 0.4;
+      strafeVal = 0.35;
     }
 
     s_Swerve.drive(

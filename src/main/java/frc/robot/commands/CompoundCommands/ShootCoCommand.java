@@ -39,12 +39,12 @@ public class ShootCoCommand extends SequentialCommandGroup{
                                 new ConditionalCommand(
                                     new InfeedCommand(s_Infeed, 0.05, 0.4),
                                     new InfeedCommand(s_Infeed, InfeedConstants.CORAL_SHOT, InfeedConstants.CORAL_SHOT),
-                                    () -> s_Arm.returnSetPoint() == ArmConstants.L1_INVERSE),
+                                    () -> s_Arm.returnSetPoint() == ArmConstants.L1_Front),
 
                                 () -> s_Arm.returnSetPoint() == ArmConstants.COMP),
 
 
-                            () -> s_Arm.returnSetPoint() == ArmConstants.L4_INVERSE
+                            () -> s_Arm.returnSetPoint() == ArmConstants.L4_Front
                         ),
                         //while false
                         new ConditionalCommand(
@@ -57,7 +57,7 @@ public class ShootCoCommand extends SequentialCommandGroup{
                             new ConditionalCommand(
                                 new InfeedCommand(s_Infeed, -InfeedConstants.PROCESSOR_SHOT, -InfeedConstants.PROCESSOR_SHOT),
                                 new InfeedCommand(s_Infeed, -InfeedConstants.CORAL_SHOT, -InfeedConstants.CORAL_SHOT),
-                                () -> s_Sensor.algaeSensed()
+                                () -> s_Sensor.bottomAlgaeSensed()
                             ),
                             
 
@@ -67,11 +67,11 @@ public class ShootCoCommand extends SequentialCommandGroup{
                         ),
 
                         //condition
-                        () -> s_Arm.returnSetPoint() == ArmConstants.L2_INVERSE ||
-                         s_Arm.returnSetPoint() == ArmConstants.L3_INVERSE ||
-                         s_Arm.returnSetPoint() == ArmConstants.L4_INVERSE ||
+                        () -> s_Arm.returnSetPoint() == ArmConstants.L2_Front ||
+                         s_Arm.returnSetPoint() == ArmConstants.L3_Front ||
+                         s_Arm.returnSetPoint() == ArmConstants.L4_Front ||
                          s_Arm.returnSetPoint() == ArmConstants.COMP ||
-                         s_Arm.returnSetPoint() == ArmConstants.L1_INVERSE
+                         s_Arm.returnSetPoint() == ArmConstants.L1_Front
                     )
                 )
             // )

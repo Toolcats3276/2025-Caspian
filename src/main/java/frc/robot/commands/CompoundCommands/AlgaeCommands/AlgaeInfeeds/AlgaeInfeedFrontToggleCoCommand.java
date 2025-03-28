@@ -49,7 +49,7 @@ public class AlgaeInfeedFrontToggleCoCommand extends SequentialCommandGroup{
                             )
                         ),
                     //condition
-                    () -> s_Sensor.algaeSensed()
+                    () -> s_Sensor.bottomAlgaeSensed()
                     
                 )
             )

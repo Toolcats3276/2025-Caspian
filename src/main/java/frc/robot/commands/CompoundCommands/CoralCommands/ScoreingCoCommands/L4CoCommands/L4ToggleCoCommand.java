@@ -19,7 +19,7 @@ public class L4ToggleCoCommand extends SequentialCommandGroup{
                     new ParallelCommandGroup(
                         new L4FrontCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed)
                     ),
-                    () -> s_Arm.returnSetPoint() == ArmConstants.L4_INVERSE
+                    () -> s_Arm.returnSetPoint() == ArmConstants.L4_Front
                 )
         );
         addRequirements(s_Wrist, s_Arm, s_Elevator, s_Infeed);

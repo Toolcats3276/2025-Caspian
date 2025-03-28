@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Autos.SmartRightLeftGround;
 import frc.robot.commands.*;
 import frc.robot.commands.AutoAlignmentCommands.LaserCanAutoScore;
 import frc.robot.commands.CompoundCommands.CancelCoCommand;
@@ -24,10 +25,6 @@ import frc.robot.commands.CompoundCommands.SuckOut;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.AlgaeInfeedFrontToggleCoCommand;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.AlgaeInfeedSensorCoCommand;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.AlgaeInfeedBackToggleCoCommand;
-import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.ReefInfeedCommands.AlgaeInfeedL1BackSensorCoCommand;
-import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.ReefInfeedCommands.AlgaeInfeedL1FrontSensorCoCommand;
-import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.ReefInfeedCommands.AlgaeInfeedL2BackSensorCoCommand;
-import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.ReefInfeedCommands.AlgaeInfeedL2SensorFrontCoCommand;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.ScoringCommands.AlgaeToggleScoreCoCommand;
 import frc.robot.commands.CompoundCommands.AutoCommands.AutoCoralInfeedSensorCommand;
 import frc.robot.commands.CompoundCommands.Climb.ClimbCoCommand;
@@ -189,7 +186,10 @@ public class RobotContainer {
         // AutoChooser.addOption("1P", new PathPlannerAuto("LeftWall"));
         // AutoChooser.addOption("3L4L", new PathPlannerAuto("3L4L"));
 
+        AutoChooser.addOption("Left Souce", new PathPlannerAuto("Left Source"));
+
         AutoChooser.addOption("AA Red Left Ground", new PathPlannerAuto("AA Red Left Ground"));
+        AutoChooser.addOption("AA Red Left Hybrid", new PathPlannerAuto("AA Red Left Hybrid"));
 
         AutoChooser.addOption("Red Left Ground", new PathPlannerAuto("Red Left Ground"));
         AutoChooser.addOption("Red Right Ground", new PathPlannerAuto("Red Right Ground"));
@@ -202,6 +202,8 @@ public class RobotContainer {
 
         AutoChooser.addOption("Blue Mid Left Ground", new PathPlannerAuto("Blue Mid Left Ground"));
         AutoChooser.addOption("Blue Mid Right Ground", new PathPlannerAuto("Blue Mid Right Ground"));
+
+        AutoChooser.addOption("Smart Red Left Ground", new SmartRightLeftGround(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor));
 
         // AutoChooser.addOption("Left Source", new PathPlannerAuto("Left Source"));
         // AutoChooser.addOption("Right Source", new PathPlannerAuto("Right Source"));
@@ -258,7 +260,7 @@ public class RobotContainer {
         // AlgaeInfeedL1Inverse.onTrue(new AlgaeInfeedL1SensorInverseCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor)
         //     .until(() -> s_Sensor.algaeInfeedDelay()));
 
-        AlgaeInfeedL2.onTrue(new AlgaeInfeedFrontToggleCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor)
+        AlgaeInfeedL2.onTrue(new AlgaeInfeedBackToggleCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor)
             .finallyDo(() -> new InstantCommand(() -> s_Sensor.setInfeedState(true))));
 
         AlgaeInfeedL2.onTrue(new ToggleCoralInfeedStateCoCommand(s_Sensor)

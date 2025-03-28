@@ -48,7 +48,7 @@ public class AlgaeInfeedBackToggleCoCommand extends SequentialCommandGroup{
                             )
                         ),
                     //condition
-                    () -> s_Sensor.algaeSensed()
+                    () -> s_Sensor.bottomAlgaeSensed()
                     
                 )
             )
