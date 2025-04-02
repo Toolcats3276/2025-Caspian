@@ -6,6 +6,7 @@ import au.grapplerobotics.interfaces.LaserCanInterface.TimingBudget;
 import au.grapplerobotics.ConfigurationFailedException;
 import au.grapplerobotics.LaserCan;
 import edu.wpi.first.math.filter.Debouncer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.InfeedConstants;
@@ -18,7 +19,7 @@ public class SensorSS extends SubsystemBase{
     private LaserCan m_coralLaserCAN;
 
     LaserCan.Measurement topLaserCANMeasurment;
-    LaserCan.Measurement bottomLaserMeasurment;
+    LaserCan.Measurement bottomLaserCANMeasurment;
     
     LaserCan.Measurement coralLaserMeasurement;
 
@@ -63,7 +64,7 @@ public class SensorSS extends SubsystemBase{
         topLaserCANMeasurment = m_topLaserCAN.getMeasurement();
 
         m_bottomLaserCAN = new LaserCan(3);
-        bottomLaserMeasurment = m_bottomLaserCAN.getMeasurement();
+        bottomLaserCANMeasurment = m_bottomLaserCAN.getMeasurement();
 
         algaeDebouncer = new Debouncer(0.1);
         algaeInfeedDelay = new Debouncer(3);
@@ -73,7 +74,7 @@ public class SensorSS extends SubsystemBase{
     @Override
     public void periodic() {
         topLaserCANMeasurment = m_topLaserCAN.getMeasurement();
-        bottomLaserMeasurment = m_bottomLaserCAN.getMeasurement();
+        bottomLaserCANMeasurment = m_bottomLaserCAN.getMeasurement();
 
         coralLaserMeasurement = m_coralLaserCAN.getMeasurement();
    
@@ -94,20 +95,22 @@ public class SensorSS extends SubsystemBase{
         SmartDashboard.putNumber("Top Measurment", topLaserCANMeasurment.distance_mm);
         SmartDashboard.putNumber("Top Ambient", topLaserCANMeasurment.ambient);
         SmartDashboard.putNumber("Top Status", topLaserCANMeasurment.status);
+        SmartDashboard.putBoolean("Top Reef", topLaserCANMeasurment.distance_mm < 600 && topLaserCANMeasurment.distance_mm > 0.01 && validTopMeasurment());
         SmartDashboard.putBoolean("Valid Top", validTopMeasurment());
 
-        SmartDashboard.putNumber("Bottom Measurment", bottomLaserMeasurment.distance_mm);
-        SmartDashboard.putNumber("Bottom Ambient", bottomLaserMeasurment.ambient);
-        SmartDashboard.putNumber("Bottom Status", bottomLaserMeasurment.status);
-        SmartDashboard.putBoolean("Valid Bottom", validTopMeasurment());
+        SmartDashboard.putNumber("Bottom Measurment", bottomLaserCANMeasurment.distance_mm);
+        SmartDashboard.putNumber("Bottom Ambient", bottomLaserCANMeasurment.ambient);
+        SmartDashboard.putNumber("Bottom Status", bottomLaserCANMeasurment.status);
+        SmartDashboard.putBoolean("Bottom Reef", bottomLaserCANMeasurment.distance_mm < 600 && bottomLaserCANMeasurment.distance_mm > 0.01 && validBottomMeasurment());
+        SmartDashboard.putBoolean("Valid Bottom", validBottomMeasurment());
         
-
+        SmartDashboard.putBoolean("Enabled", DriverStation.isEnabled());
 
     }
 
     public boolean topAlgaeSensed(){
         boolean algaeInRange;
-        if(topLaserCANMeasurment.distance_mm < 100 && validBottomMeasurment()){
+        if(topLaserCANMeasurment.distance_mm < 100 && validTopMeasurment()){
             algaeInRange = true;
         }
         else{
@@ -118,7 +121,7 @@ public class SensorSS extends SubsystemBase{
 
     public boolean bottomAlgaeSensed(){
         boolean algaeInRange;
-        if(bottomLaserMeasurment.distance_mm < 100 && validBottomMeasurment()){
+        if(bottomLaserCANMeasurment.distance_mm < 100 && validBottomMeasurment()){
             algaeInRange = true;
         }
         else{
@@ -127,20 +130,19 @@ public class SensorSS extends SubsystemBase{
         return algaeInRange;
     }
 
-
     public boolean reefSensed(){
         boolean topRange;
         boolean bottomRange;
         boolean inRange;
 
-        if(topLaserCANMeasurment.distance_mm < 500 && validTopMeasurment()){
+        if(topLaserCANMeasurment.distance_mm < 600 && topLaserCANMeasurment.distance_mm > 0.01 && validTopMeasurment()){
             topRange = true;
         }
         else{
             topRange = false;
         }
 
-        if(bottomLaserMeasurment.distance_mm < 500 && validBottomMeasurment()){
+        if(bottomLaserCANMeasurment.distance_mm < 600 && bottomLaserCANMeasurment.distance_mm > 0.01 && validBottomMeasurment()){
             bottomRange = true;
         }
         else{
@@ -176,11 +178,11 @@ public class SensorSS extends SubsystemBase{
 
     private boolean validTopMeasurment(){
         boolean validMeasurment;
-        if(topLaserCANMeasurment.ambient >= 270 && topLaserCANMeasurment.status != LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT){
-            validMeasurment = false;
+        if(topLaserCANMeasurment.ambient <= 400 && topLaserCANMeasurment.status == LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT){
+            validMeasurment = true;
         }
         else{
-            validMeasurment = true;
+            validMeasurment = false;
         }
 
         return validMeasurment;
@@ -188,11 +190,12 @@ public class SensorSS extends SubsystemBase{
 
     private boolean validBottomMeasurment(){
         boolean validMeasurment;
-        if(bottomLaserMeasurment.ambient >= 270 && bottomLaserMeasurment.status != LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT){
-            validMeasurment = false;
-        }
-        else{
+        if(bottomLaserCANMeasurment.ambient <= 400 && bottomLaserCANMeasurment.status == LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT){
             validMeasurment = true;
+        }
+
+        else{
+            validMeasurment = false;
         }
 
         return validMeasurment;

@@ -25,11 +25,12 @@ public class LaserCanAlignmentCommand extends Command {
   @Override
   public void execute() {
 
-    double translationVal;
+    // double translationVal;
+    double translationVal = 0;
     double strafeVal;
 
     if(s_Sensor.reefSensed()){
-      translationVal = -0.5;
+      // translationVal = -0.5;
       strafeVal = 0;
     }
 

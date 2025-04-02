@@ -11,12 +11,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Autos.SmartRightLeftGround;
+import frc.robot.Constants.InfeedConstants;
 import frc.robot.commands.*;
 import frc.robot.commands.AutoAlignmentCommands.LaserCanAutoScore;
+import frc.robot.commands.BaseCommands.InfeedCommands.InfeedCommand;
 import frc.robot.commands.CompoundCommands.CancelCoCommand;
 import frc.robot.commands.CompoundCommands.CompCoCommand;
 import frc.robot.commands.CompoundCommands.ShootCoCommand;
@@ -24,8 +28,11 @@ import frc.robot.commands.CompoundCommands.SuckIn;
 import frc.robot.commands.CompoundCommands.SuckOut;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.AlgaeInfeedFrontToggleCoCommand;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.AlgaeInfeedSensorCoCommand;
+import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.ReefInfeedCommands.AlgaeInfeedL1FrontSensorCoCommand;
+import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.ReefInfeedCommands.AlgaeInfeedL2SensorFrontCoCommand;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.AlgaeInfeedBackToggleCoCommand;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.ScoringCommands.AlgaeToggleScoreCoCommand;
+import frc.robot.commands.CompoundCommands.AlgaeCommands.ScoringCommands.BargeCoCommand;
 import frc.robot.commands.CompoundCommands.AutoCommands.AutoCoralInfeedSensorCommand;
 import frc.robot.commands.CompoundCommands.Climb.ClimbCoCommand;
 import frc.robot.commands.CompoundCommands.CoralCommands.CoralInfeedCommands.CoralSourceInfeedSensorCoCommand;
@@ -170,12 +177,26 @@ public class RobotContainer {
         NamedCommands.registerCommand("Infeed", new AutoCoralInfeedSensorCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor)
             .until(() -> AutoCoralInfeedSensorCommand.endCommand));
 
+        NamedCommands.registerCommand("Suckback",                                     
+            new SequentialCommandGroup(
+                new InfeedCommand(s_Infeed, 0, 0),
+                new WaitCommand(0.1),
+                new InfeedCommand(s_Infeed, -0.1, -0.1),
+                new WaitCommand(0.08),
+                new InfeedCommand(s_Infeed, 0, 0)
+            ));
+
         NamedCommands.registerCommand("Source Infeed", new CoralSourceInfeedSensorCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor)
             .until(() -> CoralSourceInfeedSensorCoCommand.endCommand));
 
         NamedCommands.registerCommand("Strafe Left", new LaserCanAutoScore(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Swerve, s_Sensor, true));
         NamedCommands.registerCommand("Strafe Right", new LaserCanAutoScore(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Swerve, s_Sensor, false));
-        
+
+        NamedCommands.registerCommand("Algae L1 Front", new AlgaeInfeedL1FrontSensorCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor));  
+        NamedCommands.registerCommand("Algae L2 Front", new AlgaeInfeedL2SensorFrontCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor));  
+        NamedCommands.registerCommand("Barge", new BargeCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed));  
+        NamedCommands.registerCommand("Barge Shot", new InfeedCommand(s_Infeed, -InfeedConstants.BARGE_SHOT, -InfeedConstants.BARGE_SHOT));
+
         
         AutoChooser = new SendableChooser<Command>();
     
@@ -186,24 +207,33 @@ public class RobotContainer {
         // AutoChooser.addOption("1P", new PathPlannerAuto("LeftWall"));
         // AutoChooser.addOption("3L4L", new PathPlannerAuto("3L4L"));
 
+        
+        AutoChooser.addOption("AA Red Left Ground", new PathPlannerAuto("AA Red Left Ground"));
+        AutoChooser.addOption("AA Red Right Ground", new PathPlannerAuto("AA Red Right Ground"));
+        
+        AutoChooser.addOption("Barge", new PathPlannerAuto("Barge"));
+
+        AutoChooser.addOption("Left Swoop", new PathPlannerAuto("Left Swoop"));
+        AutoChooser.addOption("Left Swoop Copy", new PathPlannerAuto("Left Swoop Copy"));
+
         AutoChooser.addOption("Left Souce", new PathPlannerAuto("Left Source"));
 
-        AutoChooser.addOption("AA Red Left Ground", new PathPlannerAuto("AA Red Left Ground"));
-        AutoChooser.addOption("AA Red Left Hybrid", new PathPlannerAuto("AA Red Left Hybrid"));
 
-        AutoChooser.addOption("Red Left Ground", new PathPlannerAuto("Red Left Ground"));
-        AutoChooser.addOption("Red Right Ground", new PathPlannerAuto("Red Right Ground"));
+        // AutoChooser.addOption("AA Red Left Hybrid", new PathPlannerAuto("AA Red Left Hybrid"));
 
-        AutoChooser.addOption("Blue Left Ground", new PathPlannerAuto("Blue Left Ground"));
-        AutoChooser.addOption("Blue Right Ground", new PathPlannerAuto("Blue Right Ground"));
+        // AutoChooser.addOption("Red Left Ground", new PathPlannerAuto("Red Left Ground"));
+        // AutoChooser.addOption("Red Right Ground", new PathPlannerAuto("Red Right Ground"));
 
-        AutoChooser.addOption("Red Mid Left Ground", new PathPlannerAuto("Red Mid Left Ground"));
-        AutoChooser.addOption("Red Mid Right Ground", new PathPlannerAuto("Red Mid Right Ground"));
+        // AutoChooser.addOption("Blue Left Ground", new PathPlannerAuto("Blue Left Ground"));
+        // AutoChooser.addOption("Blue Right Ground", new PathPlannerAuto("Blue Right Ground"));
 
-        AutoChooser.addOption("Blue Mid Left Ground", new PathPlannerAuto("Blue Mid Left Ground"));
-        AutoChooser.addOption("Blue Mid Right Ground", new PathPlannerAuto("Blue Mid Right Ground"));
+        // AutoChooser.addOption("Red Mid Left Ground", new PathPlannerAuto("Red Mid Left Ground"));
+        // AutoChooser.addOption("Red Mid Right Ground", new PathPlannerAuto("Red Mid Right Ground"));
 
-        AutoChooser.addOption("Smart Red Left Ground", new SmartRightLeftGround(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor));
+        // AutoChooser.addOption("Blue Mid Left Ground", new PathPlannerAuto("Blue Mid Left Ground"));
+        // AutoChooser.addOption("Blue Mid Right Ground", new PathPlannerAuto("Blue Mid Right Ground"));
+
+        // AutoChooser.addOption("Smart Red Left Ground", new SmartRightLeftGround(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor));
 
         // AutoChooser.addOption("Left Source", new PathPlannerAuto("Left Source"));
         // AutoChooser.addOption("Right Source", new PathPlannerAuto("Right Source"));
@@ -252,18 +282,18 @@ public class RobotContainer {
         AlgaeInfeed.onTrue(new AlgaeInfeedSensorCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor)
             .until(() -> s_Sensor.algaeInfeedDelay()));
             
-        AlgaeInfeedL1.onTrue(new AlgaeInfeedFrontToggleCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor)
+        Left_Trigger.onTrue(new AlgaeInfeedFrontToggleCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor)
             .finallyDo(() -> new InstantCommand(() -> s_Sensor.setInfeedState(true))));
 
-        AlgaeInfeedL1.onTrue(new ToggleCoralInfeedStateCoCommand(s_Sensor)
+        Left_Trigger.onTrue(new ToggleCoralInfeedStateCoCommand(s_Sensor)
             .finallyDo(() -> new InstantCommand(() -> s_Sensor.setInfeedState(true))));
         // AlgaeInfeedL1Inverse.onTrue(new AlgaeInfeedL1SensorInverseCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor)
         //     .until(() -> s_Sensor.algaeInfeedDelay()));
 
-        AlgaeInfeedL2.onTrue(new AlgaeInfeedBackToggleCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor)
+        Right_Trigger.onTrue(new AlgaeInfeedBackToggleCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor)
             .finallyDo(() -> new InstantCommand(() -> s_Sensor.setInfeedState(true))));
 
-        AlgaeInfeedL2.onTrue(new ToggleCoralInfeedStateCoCommand(s_Sensor)
+        Right_Trigger.onTrue(new ToggleCoralInfeedStateCoCommand(s_Sensor)
             .finallyDo(() -> new InstantCommand(() -> s_Sensor.setInfeedState(true))));
         // AlgaeInfeedL2Inverse.onTrue(new AlgaeInfeedL2SensorInverseCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor)
         //     .until(() -> s_Sensor.algaeInfeedDelay()));

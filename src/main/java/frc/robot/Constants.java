@@ -49,8 +49,8 @@ public final class Constants {
         public static final double ALGAE_INFEED = 0.425;//.425
         public static final double ALGAE_INFEED_L1_Front = .53;
         public static final double ALGAE_INFEED_L1 = .586;
-        public static final double ALGAE_INFEED_L2 = .586;
         public static final double ALGAE_INFEED_L2_Front = .531;//.531
+        public static final double ALGAE_INFEED_L2 = .586;
         public static final double ALGAE_INFEED_L2_COMP = .46;
 
         //Reef
@@ -207,6 +207,7 @@ public final class Constants {
 
         public static final double CORAL_SHOT = 0.65;
         public static final double PROCESSOR_SHOT = 0.15;
+        public static final double BARGE_SHOT = 0.1;
 
         public static final String ALGAE_INFEED_GROUND = "Ground Infeed";
         public static final String ALGAE_INFEED_L1 = "L1 Infeed";
