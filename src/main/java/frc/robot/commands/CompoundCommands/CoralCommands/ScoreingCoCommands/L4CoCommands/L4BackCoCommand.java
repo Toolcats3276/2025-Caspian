@@ -80,7 +80,7 @@ public class L4BackCoCommand extends SequentialCommandGroup{
                 new SequentialCommandGroup(
                     new WaitCommand(0.5),
                     new InfeedCommand(s_Infeed, 0.18, 0.18),
-                    new WaitCommand(0.08),
+                    new WaitCommand(0.09),
                     new InfeedCommand(s_Infeed, 0, 0)
                 )
             )

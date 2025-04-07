@@ -5,9 +5,15 @@
     "data": {
       "commands": [
         {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "AA Blue Left Ground 1"
+                }
+              },
               {
                 "type": "sequential",
                 "data": {
@@ -38,12 +44,6 @@
                     }
                   ]
                 }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "AA Left Ground 1"
-                }
               }
             ]
           }
@@ -59,7 +59,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "AA Left Ground 2"
+                        "pathName": "AA Blue Left Ground 2"
                       }
                     },
                     {
@@ -106,7 +106,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "AA Left Ground 3"
+                  "pathName": "AA Blue Left Ground 3"
                 }
               },
               {
@@ -179,7 +179,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "AA Left Ground 4"
+                        "pathName": "AA Blue Left Ground 4"
                       }
                     }
                   ]
@@ -195,7 +195,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "AA Left Ground 5"
+                  "pathName": "AA Blue Left Ground 5"
                 }
               },
               {
@@ -231,15 +231,15 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.1
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "Strafe Right"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
                 }
               }
             ]

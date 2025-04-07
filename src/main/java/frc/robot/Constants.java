@@ -207,7 +207,7 @@ public final class Constants {
 
         public static final double CORAL_SHOT = 0.65;
         public static final double PROCESSOR_SHOT = 0.15;
-        public static final double BARGE_SHOT = 0.1;
+        public static final double BARGE_SHOT = 0.12;
 
         public static final String ALGAE_INFEED_GROUND = "Ground Infeed";
         public static final String ALGAE_INFEED_L1 = "L1 Infeed";

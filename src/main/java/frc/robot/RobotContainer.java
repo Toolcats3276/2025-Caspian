@@ -207,25 +207,28 @@ public class RobotContainer {
         // AutoChooser.addOption("1P", new PathPlannerAuto("LeftWall"));
         // AutoChooser.addOption("3L4L", new PathPlannerAuto("3L4L"));
 
+        AutoChooser.addOption("Blue Barge", new PathPlannerAuto("Blue Barge"));
+        AutoChooser.addOption("Red Barge", new PathPlannerAuto("Red Barge"));
         
         AutoChooser.addOption("AA Red Left Ground", new PathPlannerAuto("AA Red Left Ground"));
         AutoChooser.addOption("AA Red Right Ground", new PathPlannerAuto("AA Red Right Ground"));
+        AutoChooser.addOption("AA Blue Left Ground", new PathPlannerAuto("AA Blue Left Ground"));
+        AutoChooser.addOption("AA Blue Right Ground", new PathPlannerAuto("AA Blue Right Ground"));
         
-        AutoChooser.addOption("Barge", new PathPlannerAuto("Barge"));
 
-        AutoChooser.addOption("Left Swoop", new PathPlannerAuto("Left Swoop"));
-        AutoChooser.addOption("Left Swoop Copy", new PathPlannerAuto("Left Swoop Copy"));
+        // AutoChooser.addOption("Left Swoop", new PathPlannerAuto("Left Swoop"));
+        // AutoChooser.addOption("Left Swoop Copy", new PathPlannerAuto("Left Swoop Copy"));
 
-        AutoChooser.addOption("Left Souce", new PathPlannerAuto("Left Source"));
+        // AutoChooser.addOption("Left Souce", new PathPlannerAuto("Left Source"));
 
 
         // AutoChooser.addOption("AA Red Left Hybrid", new PathPlannerAuto("AA Red Left Hybrid"));
 
-        // AutoChooser.addOption("Red Left Ground", new PathPlannerAuto("Red Left Ground"));
-        // AutoChooser.addOption("Red Right Ground", new PathPlannerAuto("Red Right Ground"));
+        AutoChooser.addOption("Red Left Ground", new PathPlannerAuto("Red Left Ground"));
+        AutoChooser.addOption("Red Right Ground", new PathPlannerAuto("Red Right Ground"));
 
-        // AutoChooser.addOption("Blue Left Ground", new PathPlannerAuto("Blue Left Ground"));
-        // AutoChooser.addOption("Blue Right Ground", new PathPlannerAuto("Blue Right Ground"));
+        AutoChooser.addOption("Blue Left Ground", new PathPlannerAuto("Blue Left Ground"));
+        AutoChooser.addOption("Blue Right Ground", new PathPlannerAuto("Blue Right Ground"));
 
         // AutoChooser.addOption("Red Mid Left Ground", new PathPlannerAuto("Red Mid Left Ground"));
         // AutoChooser.addOption("Red Mid Right Ground", new PathPlannerAuto("Red Mid Right Ground"));
@@ -386,3 +389,5 @@ public class RobotContainer {
         return AutoChooser.getSelected();
     }
 }
+
+//java -jar C:\Users\Staff\Downloads\photonvision-v2025.3.1-winx64.jar

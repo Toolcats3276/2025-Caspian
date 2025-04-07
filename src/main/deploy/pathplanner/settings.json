@@ -3,8 +3,8 @@
   "robotLength": 0.864,
   "holonomicMode": true,
   "pathFolders": [
-    "AA Blue Left Ground",
     "AA Red Left Ground",
+    "AA Blue Left Ground",
     "AA Red Left Hybrid",
     "AA Red Right Ground",
     "AAS RLGS",
@@ -14,10 +14,10 @@
     "LeftWall",
     "Mid Left Ground",
     "Mid Right Ground",
-    "SwoopAuto",
     "Red Left Ground",
     "Right Ground",
-    "Right Source"
+    "Right Source",
+    "SwoopAuto"
   ],
   "autoFolders": [
     "Barge",
