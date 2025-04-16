@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 3.29,
-        "y": 3.89
+        "y": 3.8
       },
       "prevControl": {
         "x": 2.29,
-        "y": 3.89
+        "y": 3.8
       },
       "nextControl": null,
       "isLocked": false,
@@ -59,7 +59,7 @@
     "rotation": 180.0
   },
   "reversed": false,
-  "folder": "AA Red Left Ground",
+  "folder": "AA Blue Left Ground",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0

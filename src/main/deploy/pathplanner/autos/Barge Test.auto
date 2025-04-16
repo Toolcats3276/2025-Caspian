@@ -1,0 +1,61 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Barge 1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Barge 2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Barge 3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Barge 4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Barge 5"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Barge 6"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Barge 7"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Barge 8"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Barge",
+  "choreoAuto": false
+}

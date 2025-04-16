@@ -121,7 +121,7 @@ public class ToggleCoralInfeedCoCommand extends SequentialCommandGroup{
                                         new InfeedCommand(s_Infeed, 0, 0),
                                         new WaitCommand(0.1),
                                         new InfeedCommand(s_Infeed, -0.1, -0.1),
-                                        new WaitCommand(0.08),
+                                        new WaitCommand(0.08), //0.09
                                         new InfeedCommand(s_Infeed, 0, 0)
                                     ),
                                     new ArmPIDCommand(s_Arm, ArmConstants.COMP, ArmConstants.MAX_PID_OUTPUT),

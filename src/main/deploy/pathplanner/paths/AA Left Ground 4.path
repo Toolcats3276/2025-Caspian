@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 3.2,
-        "y": 4.21
+        "y": 4.12
       },
       "prevControl": null,
       "nextControl": {
         "x": 2.6252500000000003,
-        "y": 4.1545000000000005
+        "y": 4.064500000000001
       },
       "isLocked": false,
       "linkedName": null
@@ -72,7 +72,7 @@
     "rotation": 180.0
   },
   "reversed": false,
-  "folder": "AA Red Left Ground",
+  "folder": "AA Blue Left Ground",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0
