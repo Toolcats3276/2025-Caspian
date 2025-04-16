@@ -209,6 +209,7 @@ public class RobotContainer {
 
         AutoChooser.addOption("Blue Barge", new PathPlannerAuto("Blue Barge"));
         AutoChooser.addOption("Red Barge", new PathPlannerAuto("Red Barge"));
+        AutoChooser.addOption("Barge Test", new PathPlannerAuto("Barge Test"));
         
         AutoChooser.addOption("AA Red Left Ground", new PathPlannerAuto("AA Red Left Ground"));
         AutoChooser.addOption("AA Red Right Ground", new PathPlannerAuto("AA Red Right Ground"));
@@ -243,8 +244,6 @@ public class RobotContainer {
 
         SmartDashboard.putData(AutoChooser);   
         
-        SmartDashboard.putNumber("Light Timer", LEDDefault.blinkTimer.get());
-
 
         // Configure the button bindings
         configureButtonBindings();

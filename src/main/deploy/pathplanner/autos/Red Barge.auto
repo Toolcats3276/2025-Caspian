@@ -5,13 +5,7 @@
     "data": {
       "commands": [
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -27,7 +21,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.15
+                        "waitTime": 1.35
                       }
                     },
                     {
@@ -35,14 +29,33 @@
                       "data": {
                         "name": "Shoot"
                       }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.3
+                      }
                     }
                   ]
                 }
               },
               {
-                "type": "path",
+                "type": "sequential",
                 "data": {
-                  "pathName": "Barge 1"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.2
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Barge 1"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -112,7 +125,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Barge 3"
+                  "pathName": "Red Barge 3"
                 }
               },
               {
@@ -207,7 +220,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": " Red Barge 5"
+                  "pathName": "Red Barge 5"
                 }
               },
               {
@@ -229,7 +242,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.85
+                        "waitTime": 0.8
                       }
                     },
                     {
@@ -255,7 +268,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Barge 6"
+                        "pathName": "Red Barge 6"
                       }
                     },
                     {
@@ -308,7 +321,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Barge 7"
+                  "pathName": "Red Barge 7"
                 }
               },
               {
@@ -352,7 +365,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Barge 8"
+                  "pathName": "Red Barge 8"
                 }
               },
               {

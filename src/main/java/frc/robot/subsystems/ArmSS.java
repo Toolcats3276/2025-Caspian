@@ -32,9 +32,9 @@ public class ArmSS extends SubsystemBase{
 
     private double manualVal;
     private double output;
-    private double p = 16;
+    private double p = 13; //16
     private double i;
-    private double d;
+    private double d = 0.005;
 
     public ArmSS(){
         m_leadArmMotor = new TalonFX(ArmConstants.ARM_LEAD_MOTR_ID);

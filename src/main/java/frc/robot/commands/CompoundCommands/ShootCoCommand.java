@@ -38,7 +38,10 @@ public class ShootCoCommand extends SequentialCommandGroup{
                                 ),
                                 new ConditionalCommand(
                                     new InfeedCommand(s_Infeed, 0.05, 0.4),
-                                    new InfeedCommand(s_Infeed, InfeedConstants.CORAL_SHOT, InfeedConstants.CORAL_SHOT),
+                                    new ConditionalCommand(
+                                        new InfeedCommand(s_Infeed, InfeedConstants.L3_SHOT, InfeedConstants.L3_SHOT),
+                                        new InfeedCommand(s_Infeed, InfeedConstants.CORAL_SHOT, InfeedConstants.CORAL_SHOT),
+                                        () -> s_Arm.returnSetPoint() == ArmConstants.L3_Front),
                                     () -> s_Arm.returnSetPoint() == ArmConstants.L1_Front),
 
                                 () -> s_Arm.returnSetPoint() == ArmConstants.COMP),

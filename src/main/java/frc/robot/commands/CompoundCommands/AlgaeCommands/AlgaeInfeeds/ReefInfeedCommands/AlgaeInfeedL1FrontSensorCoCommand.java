@@ -25,7 +25,7 @@ public class AlgaeInfeedL1FrontSensorCoCommand extends SequentialCommandGroup{
             new RepeatCommand(
                 new ConditionalCommand(
                     //on true
-                        new ParallelCommandGroup(
+                        new SequentialCommandGroup(
                             // new PrintCommand("algae sensed"),
                             // new SequentialCommandGroup(
                             //     new WaitCommand(0.375),
@@ -36,13 +36,14 @@ public class AlgaeInfeedL1FrontSensorCoCommand extends SequentialCommandGroup{
                             //         new ElevatorPIDCommand(s_Elevator, ElevatorConstants.COMP, ElevatorConstants.MAX_PID_OUTPUT)
                             //     )
                             // ),
+                            new WaitCommand(0.1),
                             new InstantCommand(() -> s_Infeed.setVoltage(InfeedConstants.IDLE_ALGAE_VOLTAGE))
                         ),
                     //on false
                         new ParallelCommandGroup(
                             new ArmPIDCommand(s_Arm, ArmConstants.ALGAE_INFEED_L1_Front, ArmConstants.MAX_PID_OUTPUT),
                             new WristPIDCommand(s_Wrist, WristConstants.ALGAE_INFEED_L1_Front, WristConstants.MAX_PID_OUTPUT),
-                            new ElevatorPIDCommand(s_Elevator, ElevatorConstants.ALGAE_INFEED_L1_Front, ElevatorConstants.MAX_PID_OUTPUT),
+                            new ElevatorPIDCommand(s_Elevator, ElevatorConstants.AUTO_ALGAE_INFEED_L1_Front, ElevatorConstants.MAX_PID_OUTPUT),
                             new InfeedCommand(s_Infeed, InfeedConstants.ALGAE_INFEED, InfeedConstants.ALGAE_INFEED)
                             // new InstantCommand(() -> s_Sensor.setAlgaeInfeedState(InfeedConstants.ALGAE_INFEED_L2))
                         ),
