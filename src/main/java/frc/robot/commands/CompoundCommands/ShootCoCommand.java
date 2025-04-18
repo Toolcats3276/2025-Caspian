@@ -58,7 +58,11 @@ public class ShootCoCommand extends SequentialCommandGroup{
                             ),
 
                             new ConditionalCommand(
-                                new InfeedCommand(s_Infeed, -InfeedConstants.PROCESSOR_SHOT, -InfeedConstants.PROCESSOR_SHOT),
+                                new ConditionalCommand(
+                                    new InfeedCommand(s_Infeed, -InfeedConstants.PROCESSOR_SHOT, -InfeedConstants.PROCESSOR_SHOT),
+                                    new InfeedCommand(s_Infeed, -InfeedConstants.TELE_BARGE_SHOT, -InfeedConstants.TELE_BARGE_SHOT), 
+                                    () -> s_Arm.returnSetPoint() == ArmConstants.PROCESSOR
+                                ),
                                 new InfeedCommand(s_Infeed, -InfeedConstants.CORAL_SHOT, -InfeedConstants.CORAL_SHOT),
                                 () -> s_Sensor.bottomAlgaeSensed()
                             ),

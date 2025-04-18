@@ -214,6 +214,7 @@ public final class Constants {
         public static final double CORAL_SHOT = 0.65;
         public static final double L3_SHOT = 0.4;
         public static final double PROCESSOR_SHOT = 0.15;
+        public static final double TELE_BARGE_SHOT = 0.3;//1 0.65
         public static final double BARGE_SHOT = .2; //0.1
 
         public static final String ALGAE_INFEED_GROUND = "Ground Infeed";

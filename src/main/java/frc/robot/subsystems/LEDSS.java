@@ -1,6 +1,7 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Second;
 import static edu.wpi.first.units.Units.Seconds;
 
 import edu.wpi.first.wpilibj.AddressableLED;
@@ -24,7 +25,8 @@ public class LEDSS extends SubsystemBase{
 
   private LEDPattern green = LEDPattern.solid(Color.kGreen);
   private LEDPattern black = LEDPattern.solid(Color.kBlack);
-  private LEDPattern infeedBlink = green.blink(Seconds.of(.1)).overlayOn(black);
+
+
   
     public LEDSS() {
       m_ledBuffer = new AddressableLEDBuffer(43);
@@ -56,6 +58,7 @@ public class LEDSS extends SubsystemBase{
     public void periodic() {
       
       var alliance = DriverStation.getAlliance();
+
         
       switch(LED_Mode){
   
@@ -133,12 +136,12 @@ public class LEDSS extends SubsystemBase{
 
         case idle:{
           for(var i = 0; i<m_ledBuffer.getLength(); i++){
-            if (alliance.get() == DriverStation.Alliance.Blue) {
-              m_ledBuffer.setLED(i, Color.kBlue);
-            }
-            else if (alliance.get() == DriverStation.Alliance.Red) {
-              m_ledBuffer.setLED(i, Color.kRed);
-            }
+              if (alliance.get() == DriverStation.Alliance.Blue) {
+                m_ledBuffer.setLED(i, Color.kBlue);
+              }
+              else if (alliance.get() == DriverStation.Alliance.Red) {
+                m_ledBuffer.setLED(i, Color.kRed);
+              }   
           }
         }
 
