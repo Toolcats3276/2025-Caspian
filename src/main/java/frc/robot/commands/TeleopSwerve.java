@@ -1,8 +1,14 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.Swerve;
+import frc.robot.subsystems.ArmSS;
 import frc.robot.subsystems.ElevatorSS;
+import frc.robot.subsystems.InfeedSS;
+import frc.robot.subsystems.SensorSS;
 import frc.robot.subsystems.SwerveSS;
+import frc.robot.subsystems.WristSS;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
@@ -16,23 +22,24 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class TeleopSwerve extends Command {    
     private SwerveSS s_Swerve;  
-    private ElevatorSS s_Elevator;  
+    private ArmSS s_Arm;
+    private SensorSS s_Sensor;
+    private InfeedSS s_Infeed;
+    private WristSS s_Wrist;
+    private ElevatorSS s_Elevator;
     private DoubleSupplier translationSup;
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
     private BooleanSupplier autoAlign;
-
-    public static PIDController LLTranslationPIDController;
-    public static PIDController LLStrafePIDController;
-    public static PIDController LLRotationPIDController;
-
-    private Debouncer rotationDebouncer;
+    private BooleanSupplier alignLeft;
+    private BooleanSupplier alignRight;
+    private BooleanSupplier top;
+    private BooleanSupplier bottom;
     
 
-    public TeleopSwerve(SwerveSS s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier autoAlign, ElevatorSS s_Elevator) {
+    public TeleopSwerve(SwerveSS s_Swerve, ArmSS s_Arm, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier autoAlign, BooleanSupplier alignLeft, BooleanSupplier alignRight, BooleanSupplier top, BooleanSupplier bottom, ElevatorSS s_Elevator) {
         this.s_Swerve = s_Swerve;
-        this.s_Elevator = s_Elevator;
         addRequirements(s_Swerve);
 
         this.translationSup = translationSup;
@@ -40,87 +47,113 @@ public class TeleopSwerve extends Command {
         this.rotationSup = rotationSup;
         this.robotCentricSup = robotCentricSup;
         this.autoAlign = autoAlign;
-
-        LLTranslationPIDController = new PIDController(0.05, 0, 0);
-            LLTranslationPIDController.reset();
-        LLStrafePIDController = new PIDController(0.009, 0, 0.0);
-            LLStrafePIDController.reset();
-            LLStrafePIDController.setTolerance(5);
-
-        // LLRotationPIDController = new PIDController(0.2, 0, 0.001);
-        LLRotationPIDController = new PIDController(0.02, 0, 0.001);
-            LLRotationPIDController.reset();
-            LLRotationPIDController.setTolerance(5);
-        rotationDebouncer = new Debouncer(0.25);
+        this.alignLeft = alignLeft;
+        this.alignRight = alignRight;
+        this.top = top;
+        this.bottom = bottom;
+        this.s_Elevator = s_Elevator;
+        this.s_Arm = s_Arm;
     }
 
     @Override
     public void execute() {
-        /* Get Values, Deadband*/
         double translationVal;
         double strafeVal;
         double rotationVal;
-        double LLTranslationVal;
-        double LLStrafeVal;
-        double LLRotationVal;
-
-        if(autoAlign.getAsBoolean()){
-            // LLTranslationVal = s_Swerve.m_frontLeftLL.calculateTranslationOutput_TA(0);
-            // LLStrafeVal = s_Swerve.m_frontLeftLL.calculateTranslationOutput_TX(0);
-            // LLRotationVal = s_Swerve.m_frontLeftLL.calculateRotationOutput(0);
-
-            // LLTranslationVal = LLTranslationPIDController.calculate(100 - s_Swerve.m_frontLeftLL.getTA(), 80);
-            LLTranslationVal = 0;
-
-            if(s_Swerve.m_frontLeftLL.getTV()){
-                LLStrafeVal = LLStrafePIDController.calculate(s_Swerve.m_frontLeftLL.getTX(), 0);
-            }
-            else{
-                LLStrafeVal = 0;
-            }
+        boolean Align_BackSide = s_Arm.returnSetPoint() == ArmConstants.L1 || s_Arm.returnSetPoint() == ArmConstants.L2 || s_Arm.returnSetPoint() == ArmConstants.L3 || s_Arm.returnSetPoint() == ArmConstants.L4;
             
-            if(rotationDebouncer.calculate(LLRotationPIDController.atSetpoint())){
-                LLRotationVal = 0;
+        if (Align_BackSide) {
+            if(alignLeft.getAsBoolean()){
+                if (Math.abs(s_Swerve.LLAssistantBL.getTX()) > 1.2 || Math.abs(s_Swerve.LLAssistantBL.getTY()) > 1) {
+                    translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.TranslationCalculateBL();
+                    strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.StrafeCalculateBL();
+                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.HeadingCalculateBL();
+                }
+                else{
+                    if (Math.abs(s_Swerve.LLAssistantBL.getTX()) <= 1.2 || Math.abs(s_Swerve.LLAssistantBL.getTY()) <= 1) {
+                        translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+                        strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+                        rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
+                    }
+                    else{
+                    translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+                    strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
+                    }
+                }
             }
-            else if(s_Swerve.m_frontLeftLL.getTV()){
-                LLRotationVal = s_Swerve.optimizedLLRotation();
+
+            else if (alignRight.getAsBoolean()) {
+                if (Math.abs(s_Swerve.LLAssistantBR.getTX()) > 1.2|| Math.abs(s_Swerve.LLAssistantBR.getTY()) > 1) {
+                    translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.TranslationCalculateBR();
+                    strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.StrafeCalculateBR();
+                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.HeadingCalculateBR();
+                }
+                else{
+                    if (Math.abs(s_Swerve.LLAssistantBR.getTX()) <= 1.2 || Math.abs(s_Swerve.LLAssistantBR.getTY()) <= 1) {
+                        translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+                        strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+                        rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
+                    }
+                    else{
+                    translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+                    strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
+                    }
+                }
             }
-            else{
-                LLRotationVal = 0;
-            } 
+
+            else {
+                /* Get Values, Deadband*/
+                translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+                strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+                rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
+            }
         }
+
         else{
-            LLTranslationVal = 0;
-            LLStrafeVal = 0;
-            LLRotationVal = 0;
-        }
+            if(alignLeft.getAsBoolean()){
+                if (Math.abs(s_Swerve.LLAssistantFL.getTX()) > 1.2 || Math.abs(s_Swerve.LLAssistantFL.getTY()) > 1) {
+                    translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband)-s_Swerve.TranslationCalculateFL();
+                    strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband)-s_Swerve.StrafeCalculateFL();
+                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.HeadingCalculateFL();
+                }
+                else{
+                    if (Math.abs(s_Swerve.LLAssistantFL.getTX()) <= 1.2 || Math.abs(s_Swerve.LLAssistantFL.getTY()) <= 1) {
+                        translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+                        strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+                        rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
+                    }
+                    else{
+                    translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+                    strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
+                    }
+                }
+            }
 
-        if(s_Elevator.getSetpoint() > 1.2){
-            double curvedTranslationVal = Math.pow(translationSup.getAsDouble(), 3)*2/3 + translationSup.getAsDouble()/3;
-            double curvedStrafeVal = Math.pow(strafeSup.getAsDouble(), 3)*2/3 + strafeSup.getAsDouble()/3;
-            double curvedRotationVal = Math.pow(rotationSup.getAsDouble(), 3)*2/3 + rotationSup.getAsDouble()/3;
+            else if (alignRight.getAsBoolean()) {
+                if (Math.abs(s_Swerve.LLAssistantFR.getTX()) > 1.2|| Math.abs(s_Swerve.LLAssistantFR.getTY()) > 1) {
+                    translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband)-s_Swerve.TranslationCalculateFR();
+                    strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband)-s_Swerve.StrafeCalculateFR();
+                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.HeadingCalculateFR();
+                }
+                else{
+                    translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+                    strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
+                }
+            }
 
-            translationVal = curvedTranslationVal;
-            strafeVal = curvedStrafeVal;
-            rotationVal = curvedRotationVal;
-
-            // translationVal = MathUtil.applyDeadband(curvedTranslationVal, Constants.stickDeadband);
-            // strafeVal = MathUtil.applyDeadband(curvedStrafeVal, Constants.stickDeadband);
-            // rotationVal = MathUtil.applyDeadband(curvedRotationVal, Constants.stickDeadband);
-        }
-        else{
-            /* Get Values, Deadband*/
-            translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
-            strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
-            rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
+            else {
+                /* Get Values, Deadband*/
+                translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+                strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
+                rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
+            }
         }
 
         SmartDashboard.putBoolean("autoAlign", autoAlign.getAsBoolean());
-        SmartDashboard.putNumber("X Trans", LLTranslationVal);
-        SmartDashboard.putNumber("Y Trans", LLStrafeVal);
-        SmartDashboard.putNumber("Theta Trans", LLRotationVal);
-
-        SmartDashboard.putBoolean("Rotation Tolerance", rotationDebouncer.calculate(LLRotationPIDController.atSetpoint()));
 
         // if(DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
         //     translationVal = -translationVal;
@@ -132,9 +165,7 @@ public class TeleopSwerve extends Command {
             new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
             rotationVal * Constants.Swerve.maxAngularVelocity, 
             !robotCentricSup.getAsBoolean(), 
-            true,
-            new Translation2d(LLTranslationVal, LLStrafeVal).times(Constants.Swerve.maxSpeed),
-            LLRotationVal * Constants.Swerve.maxAngularVelocity
+            true, null, 0
         );
     }
 }

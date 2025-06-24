@@ -20,8 +20,8 @@
         "y": 5.23
       },
       "prevControl": {
-        "x": 5.312249999999999,
-        "y": 5.698000000000001
+        "x": 5.568801194419931,
+        "y": 6.095240559101836
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": "Barge Mid",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -150.0
+    "rotation": -165.0
   },
   "useDefaultConstraints": false
 }

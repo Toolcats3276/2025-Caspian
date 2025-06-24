@@ -55,6 +55,7 @@ public class LEDDefault extends Command {
     }
 
     else if (s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED || 
+             s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED_Lollypop ||
              s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED_L1 || 
              s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED_L1_Front || 
              s_Arm.returnSetPoint() == ArmConstants.ALGAE_INFEED_L2 || 
