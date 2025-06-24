@@ -24,7 +24,7 @@ public class CompCoCommand extends SequentialCommandGroup{
         addCommands(
             new RepeatCommand(
                 new ConditionalCommand(  
-                    // algae comp commands (barge, processor, etc.)    
+                /* algae comp commands (barge, processor, etc.) */   
                     new ConditionalCommand(
                         // after elevator is down
                         new ParallelCommandGroup(
@@ -50,11 +50,11 @@ public class CompCoCommand extends SequentialCommandGroup{
                         () -> s_Elevator.atCompPose()
                     ),
                     
-                    // general comp command (coral, infeed, etc.)
+                /* general comp command (coral, infeed, etc.) */
                     new ConditionalCommand(
                     // after elevator is down
                         new ConditionalCommand(
-                            // L4 suck back
+                        /* L4 Suck Back */
                             new ParallelCommandGroup(
                                 new WristPIDCommand(s_Wrist, WristConstants.COMP, WristConstants.MAX_PID_OUTPUT),
                                 new ElevatorPIDCommand(s_Elevator, ElevatorConstants.COMP, ElevatorConstants.MAX_PID_OUTPUT),
@@ -68,7 +68,7 @@ public class CompCoCommand extends SequentialCommandGroup{
                                 new InstantCommand(() -> s_Sensor.setInfeedState(false)),
                                 new InstantCommand(() -> s_Sensor.setAlgaeInfeedState(InfeedConstants.ALGAE_INFEED_GROUND))
                             ), 
-                            // general comp command
+                        /* General Comp Command */
                             new ParallelCommandGroup(
                                 new WristPIDCommand(s_Wrist, WristConstants.COMP, WristConstants.MAX_PID_OUTPUT),
                                 new ElevatorPIDCommand(s_Elevator, ElevatorConstants.COMP, ElevatorConstants.MAX_PID_OUTPUT),

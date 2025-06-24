@@ -53,6 +53,7 @@ public class RobotContainer {
     /* Controllers */
     private final Joystick driver = new Joystick(0);
     private final XboxController xboxController = new XboxController(1);
+    private final Joystick Test = new Joystick(2);
 
     /* Drive Controls */
     private final int translationAxis = Joystick.AxisType.kY.value;

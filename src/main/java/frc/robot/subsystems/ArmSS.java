@@ -36,6 +36,7 @@ public class ArmSS extends SubsystemBase{
     private double i;
     private double d = 0.005;
 
+
     public ArmSS(){
         m_leadArmMotor = new TalonFX(ArmConstants.ARM_LEAD_MOTR_ID);
         m_leadArmMotor.getConfigurator().apply(new TalonFXConfiguration());
@@ -99,6 +100,8 @@ public class ArmSS extends SubsystemBase{
                 output = MathUtil.clamp(manualVal, -0.25, 0.25);
                 m_leadArmMotor.set(output);
                 break;
+            
+            
         }
 
         SmartDashboard.putNumber("Arm Motor Speed", speed);
