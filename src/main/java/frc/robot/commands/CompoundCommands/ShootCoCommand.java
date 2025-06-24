@@ -67,9 +67,6 @@ public class ShootCoCommand extends SequentialCommandGroup{
                                 () -> s_Sensor.bottomAlgaeSensed()
                             ),
                             
-
-                            // new InfeedCommand(s_Infeed, -InfeedConstants.CORAL_SHOT, -InfeedConstants.CORAL_SHOT), 
-
                             () -> s_Arm.returnSetPoint() == ArmConstants.L4
                         ),
 
@@ -81,7 +78,6 @@ public class ShootCoCommand extends SequentialCommandGroup{
                          s_Arm.returnSetPoint() == ArmConstants.L1_Front
                     )
                 )
-            // )
         );
         addRequirements(s_Infeed, s_Wrist, s_Arm, s_Elevator);
     }

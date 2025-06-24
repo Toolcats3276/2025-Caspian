@@ -12,18 +12,18 @@ import frc.robot.subsystems.ElevatorSS;
 import frc.robot.subsystems.WristSS;
 import frc.robot.subsystems.InfeedSS;
 
-public class BargeCoCommand extends SequentialCommandGroup{
+public class AutoBargeCoCommand extends SequentialCommandGroup{
 
 
 
-    public BargeCoCommand(WristSS s_Wrist, ArmSS s_Arm, ElevatorSS s_Elevator, InfeedSS s_Infeed) {
+    public AutoBargeCoCommand(WristSS s_Wrist, ArmSS s_Arm, ElevatorSS s_Elevator, InfeedSS s_Infeed) {
 
         addCommands(
                     //on true
                     new SequentialCommandGroup(
                         new ParallelCommandGroup(
                             new ArmPIDCommand(s_Arm, ArmConstants.BARGE, ArmConstants.ALGAE_BARGE_PID_OUTPUT),
-                            new WristPIDCommand(s_Wrist, WristConstants.BARGE, WristConstants.BARGE_PID_OUTPUT),
+                            new WristPIDCommand(s_Wrist, WristConstants.AUTO_BARGE, WristConstants.BARGE_PID_OUTPUT),
                             new ElevatorPIDCommand(s_Elevator, ElevatorConstants.BARGE, ElevatorConstants.MAX_PID_OUTPUT),
                             // new VoltageControlCommand(s_Infeed, InfeedConstants.IDLE_ALGAE_VOLTAGE)
                             new InstantCommand(() -> s_Infeed.setVoltage(1))

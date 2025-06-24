@@ -343,7 +343,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Barge Shot"
+                        "name": "Barge Shot 3"
                       }
                     }
                   ]
@@ -379,6 +379,12 @@
                       }
                     }
                   ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Coast"
                 }
               }
             ]

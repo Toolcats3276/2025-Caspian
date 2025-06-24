@@ -19,15 +19,15 @@ public class LimelightAssistant {
     private Matrix<N3,N1> visionMeasurementStdDevs;
     private boolean useMegaTag1;
 
-    private boolean doRejectUpdate;
+    // private boolean doRejectUpdate;
 
-    LimelightHelpers.PoseEstimate megaTag1PoseEstimator;
-    private Pose2d megaTag1Pose2d;
-    private double megaTag1Timestamp;
+    // LimelightHelpers.PoseEstimate megaTag1PoseEstimator;
+    // private Pose2d megaTag1Pose2d;
+    // private double megaTag1Timestamp;
 
-    LimelightHelpers.PoseEstimate megaTag2PoseEstimator;
-    private Pose2d megaTag2Pose2d;
-    private double megaTag2Timestamp;
+    // LimelightHelpers.PoseEstimate megaTag2PoseEstimator;
+    // private Pose2d megaTag2Pose2d;
+    // private double megaTag2Timestamp;
 
 
     private final PIDController rotationPidController;
@@ -51,16 +51,16 @@ public class LimelightAssistant {
         this.visionMeasurementStdDevs = visionMeasurementStdDevs;
         this.useMegaTag1 = useMegaTag1;
 
-        doRejectUpdate = false;
+        // doRejectUpdate = false;
 
 
-        megaTag1PoseEstimator = new PoseEstimate();
-        megaTag1PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue(limelightName);
-        megaTag1Pose2d = new Pose2d();
+        // megaTag1PoseEstimator = new PoseEstimate();
+        // megaTag1PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue(limelightName);
+        // megaTag1Pose2d = new Pose2d();
 
-        megaTag2PoseEstimator = new PoseEstimate();
-        megaTag2PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
-        megaTag2Pose2d = new Pose2d();
+        // megaTag2PoseEstimator = new PoseEstimate();
+        // megaTag2PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
+        // megaTag2Pose2d = new Pose2d();
 
         rotationPidController = new PIDController(0.006, 0, 0);
         translationPidController = new PIDController(0.001, 0, 0);
@@ -215,107 +215,107 @@ public class LimelightAssistant {
     /**
      * @return weather or not limelight pose should be updated
      */
-    public boolean rejectUpdate(){
+    // public boolean rejectUpdate(){
 
-        if(useMegaTag1 == true)
-        {
-            if(megaTag1PoseEstimator != null){
+    //     if(useMegaTag1 == true)
+    //     {
+    //         if(megaTag1PoseEstimator != null){
 
-            LimelightHelpers.PoseEstimate megaTag1PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue(limelightName);
+    //         LimelightHelpers.PoseEstimate megaTag1PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue(limelightName);
 
-              if(megaTag1PoseEstimator.tagCount == 1 & megaTag1PoseEstimator.rawFiducials.length == 1)
-              {
-                if(megaTag1PoseEstimator.rawFiducials[0].ambiguity > .7)
-                {
-                  doRejectUpdate = true;
-                }
-                if(megaTag1PoseEstimator.rawFiducials[0].distToCamera > 3)
-                {
-                  doRejectUpdate = true;
-                }
-              }
-              if(megaTag1PoseEstimator.tagCount == 0)
-              {
-                doRejectUpdate = true;
-              }
-            }
-        }
+    //           if(megaTag1PoseEstimator.tagCount == 1 & megaTag1PoseEstimator.rawFiducials.length == 1)
+    //           {
+    //             if(megaTag1PoseEstimator.rawFiducials[0].ambiguity > .7)
+    //             {
+    //               doRejectUpdate = true;
+    //             }
+    //             if(megaTag1PoseEstimator.rawFiducials[0].distToCamera > 3)
+    //             {
+    //               doRejectUpdate = true;
+    //             }
+    //           }
+    //           if(megaTag1PoseEstimator.tagCount == 0)
+    //           {
+    //             doRejectUpdate = true;
+    //           }
+    //         }
+    //     }
 
-        else if (useMegaTag1 == false & megaTag2PoseEstimator != null)
-        {
+    //     else if (useMegaTag1 == false & megaTag2PoseEstimator != null)
+    //     {
             
-        LimelightHelpers.SetRobotOrientation(limelightName, SwerveSS.m_poseEstimator.getEstimatedPosition().getRotation().getDegrees(), 0, 0, 0, 0, 0);
-        LimelightHelpers.PoseEstimate megaTag2PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
+    //     LimelightHelpers.SetRobotOrientation(limelightName, SwerveSS.m_poseEstimator.getEstimatedPosition().getRotation().getDegrees(), 0, 0, 0, 0, 0);
+    //     LimelightHelpers.PoseEstimate megaTag2PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
 
-          if(Math.abs(SwerveSS.gyro.getAngularVelocityYWorld().getValue().in(DegreesPerSecond)) > 720) // if our angular velocity is greater than 720 degrees per second, ignore vision updates
-          {
-            doRejectUpdate = true;
-          }
-          if(megaTag2PoseEstimator.tagCount == 0)
-          {
-            doRejectUpdate = true;
-          }
-        }
+    //       if(Math.abs(SwerveSS.gyro.getAngularVelocityYWorld().getValue().in(DegreesPerSecond)) > 720) // if our angular velocity is greater than 720 degrees per second, ignore vision updates
+    //       {
+    //         doRejectUpdate = true;
+    //       }
+    //       if(megaTag2PoseEstimator.tagCount == 0)
+    //       {
+    //         doRejectUpdate = true;
+    //       }
+    //     }
         
-        else{
-            doRejectUpdate = false;
-        }
+    //     else{
+    //         doRejectUpdate = false;
+    //     }
     
-        return doRejectUpdate;
-    }
+    //     return doRejectUpdate;
+    // }
 
-    /**
-     * Updates mega tag 1 and 2 variables with vision measurments. 
-     * This should be called every loop.
-     */
-    public void updatePoseEstimates(){
-        megaTag1PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue(limelightName);
-        megaTag2PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
-        updatePoseEstimateVariables();
+    // /**
+    //  * Updates mega tag 1 and 2 variables with vision measurments. 
+    //  * This should be called every loop.
+    //  */
+    // public void updatePoseEstimates(){
+    //     megaTag1PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue(limelightName);
+    //     megaTag2PoseEstimator = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(limelightName);
+    //     updatePoseEstimateVariables();
 
         
-        publishSmartDashboard();
-    }
+    //     publishSmartDashboard();
+    // }
 
-    /**
-     * Updates mega tag 1 and 2 Pose2d and Timestamp variables
-     */
-    private void updatePoseEstimateVariables(){
-        if(!rejectUpdate()){
-            if(useMegaTag1 & megaTag1PoseEstimator != null){
-                megaTag1Pose2d = megaTag1PoseEstimator.pose;
-                megaTag1Timestamp = megaTag1PoseEstimator.timestampSeconds;
-            }
-            else if(!useMegaTag1 & megaTag2PoseEstimator != null){
-                megaTag2Pose2d = megaTag2PoseEstimator.pose;
-                megaTag2Timestamp = megaTag2PoseEstimator.timestampSeconds;
-            }
-        }
-    }
+    // /**
+    //  * Updates mega tag 1 and 2 Pose2d and Timestamp variables
+    //  */
+    // private void updatePoseEstimateVariables(){
+    //     if(!rejectUpdate()){
+    //         if(useMegaTag1 & megaTag1PoseEstimator != null){
+    //             megaTag1Pose2d = megaTag1PoseEstimator.pose;
+    //             megaTag1Timestamp = megaTag1PoseEstimator.timestampSeconds;
+    //         }
+    //         else if(!useMegaTag1 & megaTag2PoseEstimator != null){
+    //             megaTag2Pose2d = megaTag2PoseEstimator.pose;
+    //             megaTag2Timestamp = megaTag2PoseEstimator.timestampSeconds;
+    //         }
+    //     }
+    // }
 
-    /**
-     * @return The vision pose measurments taken from the limelight.
-     */
-    public Pose2d getPoseEstimate(){
-        if(useMegaTag1 == true){
-            return megaTag1Pose2d;
-        }
-        else{
-            return megaTag2Pose2d;
-        }
-    }
+    // /**
+    //  * @return The vision pose measurments taken from the limelight.
+    //  */
+    // public Pose2d getPoseEstimate(){
+    //     if(useMegaTag1 == true){
+    //         return megaTag1Pose2d;
+    //     }
+    //     else{
+    //         return megaTag2Pose2d;
+    //     }
+    // }
 
-    /**
-     * @return The time stamp taken from the limelight.
-     */
-    public double getTimestamp(){
-        if(useMegaTag1 == true){
-            return megaTag1Timestamp;
-        }
-        else{
-            return megaTag2Timestamp;
-        }
-    }
+    // /**
+    //  * @return The time stamp taken from the limelight.
+    //  */
+    // public double getTimestamp(){
+    //     if(useMegaTag1 == true){
+    //         return megaTag1Timestamp;
+    //     }
+    //     else{
+    //         return megaTag2Timestamp;
+    //     }
+    // }
 
     public double getDistance(){
         var distanceFromPrimaryTag =

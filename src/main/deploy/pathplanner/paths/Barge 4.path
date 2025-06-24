@@ -48,7 +48,7 @@
   "folder": "Barge Mid",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -150.0
+    "rotation": -165.0
   },
   "useDefaultConstraints": false
 }

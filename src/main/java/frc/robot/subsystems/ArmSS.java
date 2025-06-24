@@ -88,12 +88,6 @@ public class ArmSS extends SubsystemBase{
             case PID:
                 pidController.reset();
                 output = MathUtil.clamp(pidController.calculate(m_CANCoder.getPosition().getValueAsDouble(), setPoint), -maxSpeed, maxSpeed);
-                
-                // output = 
-                // profiledPIDController.calculate(m_CANCoder.getPosition().getValueAsDouble(), 
-                //     new TrapezoidProfile.State(setPoint, 0), 
-                //     new TrapezoidProfile.Constraints(0.13, 0.13));
-
                 m_leadArmMotor.set(output);
                 break;
             
@@ -124,8 +118,6 @@ public class ArmSS extends SubsystemBase{
             pidController.calculate(m_CANCoder.getPosition().getValueAsDouble(), ArmConstants.COMP));
 
         SmartDashboard.putBoolean("Arm At Setpoint", atSetpoint());
-
-        // SmartDashboard.putNumber("Acceleration", m_CANCoder.getVelocity())
     }
 
     public void Stop(){

@@ -40,19 +40,6 @@ public class SensorSS extends SubsystemBase{
         
 
     public SensorSS(){
-        // try {
-        //     m_bottomLaserCAN.setRegionOfInterest(new RegionOfInterest(8, 8, 4, 4));
-        // } catch (ConfigurationFailedException e) {
-        //     // TODO Auto-generated catch block
-        //     e.printStackTrace();
-        // }
-        // try {
-        //     m_bottomLaserCAN.setTimingBudget(TimingBudget.TIMING_BUDGET_100MS);
-        // } catch (ConfigurationFailedException e) {
-        //     // TODO Auto-generated catch block
-        //     e.printStackTrace();
-        // }
-
         m_coralLaserCAN = new LaserCan(1);
         coralLaserMeasurement = m_coralLaserCAN.getMeasurement();
 
@@ -105,6 +92,7 @@ public class SensorSS extends SubsystemBase{
         SmartDashboard.putBoolean("Valid Bottom", validBottomMeasurment());
         
         SmartDashboard.putBoolean("Enabled", DriverStation.isEnabled());
+        SmartDashboard.putBoolean("InfeeState", infeedState);
 
     }
 

@@ -4,7 +4,13 @@
 
 package frc.robot;
 
+import frc.robot.commands.LEDDefault;
+import frc.robot.subsystems.ArmSS;
+import frc.robot.subsystems.LEDSS;
 import frc.robot.subsystems.SwerveSS;
+
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
 import au.grapplerobotics.CanBridge;
 import choreo.auto.AutoFactory;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -104,6 +110,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    s_Swerve.setNeutralMode(NeutralModeValue.Brake);
 
 
 
