@@ -24,22 +24,18 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class TeleopSwerve extends Command {    
     private SwerveSS s_Swerve;  
     private ArmSS s_Arm;
-    private SensorSS s_Sensor;
-    private InfeedSS s_Infeed;
-    private WristSS s_Wrist;
     private ElevatorSS s_Elevator;
     private DoubleSupplier translationSup;
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
-    private BooleanSupplier autoAlign;
     private BooleanSupplier alignLeft;
     private BooleanSupplier alignRight;
     private BooleanSupplier top;
     private BooleanSupplier bottom;
     
 
-    public TeleopSwerve(SwerveSS s_Swerve, ArmSS s_Arm, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier autoAlign, BooleanSupplier alignLeft, BooleanSupplier alignRight, BooleanSupplier top, BooleanSupplier bottom, ElevatorSS s_Elevator) {
+    public TeleopSwerve(SwerveSS s_Swerve, ArmSS s_Arm, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier alignLeft, BooleanSupplier alignRight, BooleanSupplier top, BooleanSupplier bottom, ElevatorSS s_Elevator) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
@@ -47,7 +43,6 @@ public class TeleopSwerve extends Command {
         this.strafeSup = strafeSup;
         this.rotationSup = rotationSup;
         this.robotCentricSup = robotCentricSup;
-        this.autoAlign = autoAlign;
         this.alignLeft = alignLeft;
         this.alignRight = alignRight;
         this.top = top;

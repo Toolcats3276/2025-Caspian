@@ -98,7 +98,6 @@ public class RobotContainer {
     private final Trigger alignRight = new Trigger(top_Left.or(middle_Left).or(bottom_Left));
     //AutoAlign
     private final Trigger robotCentric = new Trigger(top_Right.or(middle_Right).or(bottom_Right).or(top_Left).or(middle_Left).or(bottom_Left));
-    private final JoystickButton autoAlign = new JoystickButton(driver, 14);
 
     /* CO Controller */
     private final JoystickButton Co_Cancel = new JoystickButton(xboxController, XboxController.Button.kB.value);
@@ -133,7 +132,6 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean(),
-                () -> autoAlign.getAsBoolean(),
                 () -> alignLeft.getAsBoolean(),
                 () -> alignRight.getAsBoolean(),
                 () -> top.getAsBoolean(),
