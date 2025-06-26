@@ -4,15 +4,11 @@
 
 package frc.robot;
 
-import frc.robot.commands.LEDDefault;
-import frc.robot.subsystems.ArmSS;
-import frc.robot.subsystems.LEDSS;
 import frc.robot.subsystems.SwerveSS;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import au.grapplerobotics.CanBridge;
-import choreo.auto.AutoFactory;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -41,7 +37,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    this.s_Swerve = m_robotContainer.s_Swerve;
+    this.s_Swerve = RobotContainer.s_Swerve;
 
   }
 

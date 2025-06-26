@@ -9,7 +9,6 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.InfeedConstants;
@@ -19,14 +18,7 @@ public class InfeedSS extends SubsystemBase{
     private TalonFX m_infeedMotorLeft;
     private TalonFX m_infeedMotorRight;
 
-    private SimpleMotorFeedforward feedforward;
-    private double infeedCurrent;
     private double infeedVoltage;
-    private double infeedAmperage;
-
-    private double kS = 1;
-    private double kV = 0;
-    private double kA = 0;
 
     private double left_Speed;
     private double right_Speed;
@@ -36,7 +28,6 @@ public class InfeedSS extends SubsystemBase{
         m_infeedMotorLeft.getConfigurator().apply(new TalonFXConfiguration());
         m_infeedMotorLeft.setNeutralMode(NeutralModeValue.Brake);
         m_infeedMotorLeft.setInverted(true);
-
         
         m_infeedMotorRight = new TalonFX(InfeedConstants.Infeed_Right_Motor_ID);
         m_infeedMotorRight.getConfigurator().apply(new TalonFXConfiguration());
@@ -53,21 +44,12 @@ public class InfeedSS extends SubsystemBase{
 
         leftConfigurator.apply(limitConfigs);
         rightConfigurator.apply(limitConfigs);
-
-
-
-        feedforward = new SimpleMotorFeedforward(kS, kV, kA);
-
-        
-        
     }
 
     public enum mode{
         Stop,
         SetSpeed,
-        CurrentControl, 
         VoltageControl,
-        AmpControl
     }
 
     mode Mode = mode.Stop;
@@ -87,14 +69,11 @@ public class InfeedSS extends SubsystemBase{
                 m_infeedMotorRight.set(right_Speed);
                 break;
 
-            case CurrentControl:
 
             case VoltageControl:
-                m_infeedMotorLeft.setVoltage(1);
-                m_infeedMotorRight.setVoltage(1);
+                m_infeedMotorLeft.setVoltage(infeedVoltage);
+                m_infeedMotorRight.setVoltage(infeedVoltage);
                 
-            case AmpControl:
-                // m_infeedMotorLeft.setcontrol(infeedAmperage);
         }
 
         SmartDashboard.putNumber("Infeed Motor Speed", left_Speed);
@@ -114,20 +93,9 @@ public class InfeedSS extends SubsystemBase{
         Mode = mode.SetSpeed;
     }
 
-    public void CurrentControl(double infeedCurrent){
-        this.infeedCurrent = infeedCurrent;
-        Mode = mode.CurrentControl;
-    }
-
     public void setVoltage(double infeedVoltage){
         this.infeedVoltage = infeedVoltage;
         Mode = mode.VoltageControl;
     }
-
-    public void setAmperage(double infeedAmperage){
-        this.infeedAmperage = infeedAmperage;
-        Mode = mode.AmpControl;
-    }
-
 
 }

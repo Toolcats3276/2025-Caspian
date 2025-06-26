@@ -2,21 +2,13 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.Constants.ArmConstants;
-import frc.robot.Constants.Swerve;
 import frc.robot.subsystems.ArmSS;
 import frc.robot.subsystems.ElevatorSS;
-import frc.robot.subsystems.InfeedSS;
-import frc.robot.subsystems.LEDSS;
-import frc.robot.subsystems.SensorSS;
 import frc.robot.subsystems.SwerveSS;
-import frc.robot.subsystems.WristSS;
-
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -60,7 +52,7 @@ public class TeleopSwerve extends Command {
             
         if (Align_BackSide) {
             if(alignRight.getAsBoolean()){
-                if (Math.abs(s_Swerve.LLAssistantBL.getTX()) > 1.5 || Math.abs(s_Swerve.LLAssistantBL.getTY()) > 2) {
+                if (Math.abs(SwerveSS.LLAssistantBL.getTX()) > 1.5 || Math.abs(SwerveSS.LLAssistantBL.getTY()) > 2) {
                     translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.TranslationCalculateBL();
                     strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.StrafeCalculateBL();
                     rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.HeadingCalculateBL();
@@ -73,7 +65,7 @@ public class TeleopSwerve extends Command {
             }
 
             else if (alignLeft.getAsBoolean()) {
-                if (Math.abs(s_Swerve.LLAssistantBR.getTX()) > 1.5|| Math.abs(s_Swerve.LLAssistantBR.getTY()) > 2) {
+                if (Math.abs(SwerveSS.LLAssistantBR.getTX()) > 1.5|| Math.abs(SwerveSS.LLAssistantBR.getTY()) > 2) {
                     translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.TranslationCalculateBR();
                     strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.StrafeCalculateBR();
                     rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.HeadingCalculateBR();
@@ -95,7 +87,7 @@ public class TeleopSwerve extends Command {
 
         else{
             if(alignLeft.getAsBoolean()){
-                if (Math.abs(s_Swerve.LLAssistantFL.getTX()) > 1.5 || Math.abs(s_Swerve.LLAssistantFL.getTY()) > 2) {
+                if (Math.abs(SwerveSS.LLAssistantFL.getTX()) > 1.5 || Math.abs(SwerveSS.LLAssistantFL.getTY()) > 2) {
                     translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband)-s_Swerve.TranslationCalculateFL();
                     strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband)-s_Swerve.StrafeCalculateFL();
                     rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.HeadingCalculateFL();
@@ -108,7 +100,7 @@ public class TeleopSwerve extends Command {
             }
 
             else if (alignRight.getAsBoolean()) {
-                if (Math.abs(s_Swerve.LLAssistantFR.getTX()) > 1.5 || Math.abs(s_Swerve.LLAssistantFR.getTY()) > 2) {
+                if (Math.abs(SwerveSS.LLAssistantFR.getTX()) > 1.5 || Math.abs(SwerveSS.LLAssistantFR.getTY()) > 2) {
                     translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband)-s_Swerve.TranslationCalculateFR();
                     strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband)-s_Swerve.StrafeCalculateFR();
                     rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband)+s_Swerve.HeadingCalculateFR();

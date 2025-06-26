@@ -4,7 +4,6 @@ import frc.robot.SwerveModule;
 import frc.robot.vision.LimelightAssistant;
 import frc.robot.Constants.Swerve;
 import frc.robot.Robot;
-import frc.robot.commands.TeleopSwerve;
 import frc.robot.Constants.LimelightConstants;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -13,8 +12,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 import static edu.wpi.first.units.Units.Degrees;
-
-import java.util.function.BooleanSupplier;
 
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -30,7 +27,6 @@ import edu.wpi.first.math.VecBuilder;
 
 import edu.wpi.first.math.controller.PIDController;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;

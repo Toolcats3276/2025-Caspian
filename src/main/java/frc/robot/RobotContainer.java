@@ -104,7 +104,6 @@ public class RobotContainer {
     private final JoystickButton Co_ResetElevatorCount = new JoystickButton(xboxController, XboxController.Button.kA.value);
     //Co Buttons
     private final JoystickButton Co_X = new JoystickButton(xboxController, XboxController.Button.kX.value);
-    private final JoystickButton Co_Y = new JoystickButton(xboxController, XboxController.Button.kY.value);
     private final JoystickButton Co_Start = new JoystickButton(xboxController, XboxController.Button.kStart.value);
     private final JoystickButton Co_LeftStick = new JoystickButton(xboxController, XboxController.Button.kLeftStick.value);
     //Co Bumpers

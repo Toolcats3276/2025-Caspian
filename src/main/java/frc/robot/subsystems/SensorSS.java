@@ -1,9 +1,6 @@
 package frc.robot.subsystems;
 
 import au.grapplerobotics.interfaces.LaserCanInterface.Measurement;
-import au.grapplerobotics.interfaces.LaserCanInterface.RegionOfInterest;
-import au.grapplerobotics.interfaces.LaserCanInterface.TimingBudget;
-import au.grapplerobotics.ConfigurationFailedException;
 import au.grapplerobotics.LaserCan;
 import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -23,7 +20,6 @@ public class SensorSS extends SubsystemBase{
     
     LaserCan.Measurement coralLaserMeasurement;
 
-    private Debouncer algaeDebouncer;
     private Debouncer algaeInfeedDelay;
 
     private Debouncer coralDebouncer;
@@ -53,7 +49,6 @@ public class SensorSS extends SubsystemBase{
         m_bottomLaserCAN = new LaserCan(3);
         bottomLaserCANMeasurment = m_bottomLaserCAN.getMeasurement();
 
-        algaeDebouncer = new Debouncer(0.1);
         algaeInfeedDelay = new Debouncer(3);
         
     }

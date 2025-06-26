@@ -2,11 +2,8 @@ package frc.robot.commands;
 
 import java.util.function.BooleanSupplier;
 
-import javax.lang.model.util.ElementScanner14;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.subsystems.ArmSS;
 import frc.robot.subsystems.LEDSS;
@@ -84,10 +81,10 @@ public class LEDDefault extends Command {
     }
 
     else if(alignLeft.getAsBoolean() || alignRight.getAsBoolean()){
-      if (Math.abs(s_Swerve.LLAssistantFL.getTX()) > 1.5 || Math.abs(s_Swerve.LLAssistantFL.getTY()) > 2 ||
-          Math.abs(s_Swerve.LLAssistantFR.getTX()) > 1.5 || Math.abs(s_Swerve.LLAssistantFR.getTY()) > 2 ||
-          Math.abs(s_Swerve.LLAssistantBL.getTX()) > 1.5 || Math.abs(s_Swerve.LLAssistantBL.getTY()) > 2 || 
-          Math.abs(s_Swerve.LLAssistantBR.getTX()) > 1.5 || Math.abs(s_Swerve.LLAssistantBR.getTY()) > 2) {
+      if (Math.abs(SwerveSS.LLAssistantFL.getTX()) > 1.5 || Math.abs(SwerveSS.LLAssistantFL.getTY()) > 2 ||
+          Math.abs(SwerveSS.LLAssistantFR.getTX()) > 1.5 || Math.abs(SwerveSS.LLAssistantFR.getTY()) > 2 ||
+          Math.abs(SwerveSS.LLAssistantBL.getTX()) > 1.5 || Math.abs(SwerveSS.LLAssistantBL.getTY()) > 2 || 
+          Math.abs(SwerveSS.LLAssistantBR.getTX()) > 1.5 || Math.abs(SwerveSS.LLAssistantBR.getTY()) > 2) {
         s_Led.autoAligning();
       }
       else{
