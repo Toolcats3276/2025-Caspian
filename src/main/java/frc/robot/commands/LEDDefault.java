@@ -1,22 +1,34 @@
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
+
+import javax.lang.model.util.ElementScanner14;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.subsystems.ArmSS;
 import frc.robot.subsystems.LEDSS;
 import frc.robot.subsystems.SensorSS;
+import frc.robot.subsystems.SwerveSS;
 
 public class LEDDefault extends Command {
   private LEDSS s_Led;
   private SensorSS s_Sensor;
   private ArmSS s_Arm;
+  private SwerveSS s_Swerve;
+  private BooleanSupplier alignLeft;
+  private BooleanSupplier alignRight;
   public static Timer blinkTimer;
 
-  public LEDDefault(LEDSS s_Led, SensorSS s_Sensor, ArmSS s_Arm) {
+  public LEDDefault(LEDSS s_Led, SensorSS s_Sensor, ArmSS s_Arm, SwerveSS s_Swerve, BooleanSupplier alignLeft, BooleanSupplier alignRight) {
     this.s_Led = s_Led;
     this.s_Sensor = s_Sensor;
     this.s_Arm = s_Arm;
+    this.s_Swerve = s_Swerve;
+    this.alignLeft = alignLeft;
+    this.alignRight = alignRight;
     
     blinkTimer = new Timer();
     addRequirements(s_Led);
@@ -71,10 +83,26 @@ public class LEDDefault extends Command {
       s_Led.AlgaeSensed();
     }
 
+    else if(alignLeft.getAsBoolean() || alignRight.getAsBoolean()){
+      if (Math.abs(s_Swerve.LLAssistantFL.getTX()) > 1.5 || Math.abs(s_Swerve.LLAssistantFL.getTY()) > 2 ||
+          Math.abs(s_Swerve.LLAssistantFR.getTX()) > 1.5 || Math.abs(s_Swerve.LLAssistantFR.getTY()) > 2 ||
+          Math.abs(s_Swerve.LLAssistantBL.getTX()) > 1.5 || Math.abs(s_Swerve.LLAssistantBL.getTY()) > 2 || 
+          Math.abs(s_Swerve.LLAssistantBR.getTX()) > 1.5 || Math.abs(s_Swerve.LLAssistantBR.getTY()) > 2) {
+        s_Led.autoAligning();
+      }
+      else{
+        s_Led.aligned();
+      }
+    }
+
     else {
       s_Led.idle();
     }
 
+  }
+  @Override
+  public boolean runsWhenDisabled(){
+    return true;
   }
 
   @Override

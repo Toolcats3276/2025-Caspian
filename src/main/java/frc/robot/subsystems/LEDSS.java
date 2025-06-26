@@ -8,24 +8,27 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.LEDPattern;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+import frc.robot.commands.TeleopSwerve;
+import frc.robot.subsystems.ArmSS.mode;
 
 public class LEDSS extends SubsystemBase{
 
   private final AddressableLED m_led;
   private final AddressableLEDBuffer m_ledBuffer;
-  private int m_rainbowFirstPixelHue;
   private Color LED_COLOR;  
 
+
   private LEDPattern gold = LEDPattern.solid(Color.kGold);
+  private LEDPattern green = LEDPattern.solid(Color.kGreen);
   private LEDPattern blanchedAlmond = LEDPattern.solid(Color.kBlanchedAlmond);
   private LEDPattern blink = gold.blink(Seconds.of(1)).overlayOn(blanchedAlmond);
-  
-
-  private LEDPattern green = LEDPattern.solid(Color.kGreen);
-  private LEDPattern black = LEDPattern.solid(Color.kBlack);
-
+  private LEDPattern aligned = green.blink(Seconds.of(.15)).overlayOn(blanchedAlmond);
+  private LEDPattern aligning = green.breathe(Seconds.of(.25));
 
   
     public LEDSS() {
@@ -35,7 +38,6 @@ public class LEDSS extends SubsystemBase{
       m_led.start();
 
       
-      m_rainbowFirstPixelHue = 0;
     }
     
     public enum Mode{
@@ -49,7 +51,9 @@ public class LEDSS extends SubsystemBase{
       ReefAligned,
       climbed,
       climbing,
-      idle
+      idle, 
+      autoAligning,
+      aligned
     }
     
     Mode LED_Mode = Mode.off;
@@ -134,6 +138,20 @@ public class LEDSS extends SubsystemBase{
           break;
         }
 
+        case autoAligning:{
+          for(var i = 0; i<m_ledBuffer.getLength(); i++){
+              aligning.applyTo(m_ledBuffer);
+          }
+          break;
+        }
+        
+        case aligned:{
+          for(var i = 0; i<m_ledBuffer.getLength(); i++){
+            aligned.applyTo(m_ledBuffer);
+          }
+          break;
+        }
+
         case idle:{
           for(var i = 0; i<m_ledBuffer.getLength(); i++){
               if (alliance.get() == DriverStation.Alliance.Blue) {
@@ -147,6 +165,7 @@ public class LEDSS extends SubsystemBase{
               }  
           }
         }
+
   
       }
   
@@ -209,6 +228,16 @@ public class LEDSS extends SubsystemBase{
 
   public void idle(){
     LED_Mode = Mode.idle;
+    m_led.setData(m_ledBuffer);
+  }
+
+  public void autoAligning(){
+    LED_Mode = Mode.autoAligning;
+    m_led.setData(m_ledBuffer);
+  }
+
+  public void aligned(){
+    LED_Mode = Mode.aligned;
     m_led.setData(m_ledBuffer);
   }
 

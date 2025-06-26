@@ -87,6 +87,7 @@ public class ShootCoCommand extends SequentialCommandGroup{
                          s_Arm.returnSetPoint() == ArmConstants.COMP ||
                          s_Arm.returnSetPoint() == ArmConstants.L1_Front
                     )
+                    
                 )
         );
         addRequirements(s_Infeed, s_Wrist, s_Arm, s_Elevator);

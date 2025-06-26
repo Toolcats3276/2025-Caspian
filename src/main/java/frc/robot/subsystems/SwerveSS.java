@@ -89,10 +89,10 @@ public class SwerveSS extends SubsystemBase {
                 new SwerveModule(3, Swerve.Mod3.constants)
             };
 
-            LLTranslationFR = new PIDController(.065, 0, 0.02);
-            LLStrafeFR = new PIDController(0.01, 0, 0.0005);
-            LLTranslationFL = new PIDController(.027, 0, 0.03);
-            LLStrafeFL = new PIDController(0.007, 0, 0.0009);
+            LLTranslationFR = new PIDController(.065, 0, 0);
+            LLStrafeFR = new PIDController(0.01, 0, 0);
+            LLTranslationFL = new PIDController(.027, 0, 0);
+            LLStrafeFL = new PIDController(0.007, 0, 0);
             LLHeadingRotationF = new PIDController(0.014,0,0);
             
             
