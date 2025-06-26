@@ -295,14 +295,6 @@ public class SwerveSS extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
 
-
-        // SmartDashboard.putData("LL Pose", LLPose);
-        // SmartDashboard.putData("Bot Pose", BotPose);
-
-        // SmartDashboard.putNumber("X Chassis Speed", getRobotSpeed().vxMetersPerSecond);
-        // SmartDashboard.putNumber("Y Chassis Speed", getRobotSpeed().vyMetersPerSecond);
-        // SmartDashboard.putNumber("Omega Chassis Speed", getRobotSpeed().omegaRadiansPerSecond);
-
         
         SmartDashboard.putBoolean("FlipAutoBuilder", AutoBuilder.shouldFlip());
 

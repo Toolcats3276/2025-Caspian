@@ -188,12 +188,6 @@ public class LEDSS extends SubsystemBase{
     m_led.setData(m_ledBuffer);
   }
 
-  // public void rainbow() {
-  //   LED_Mode = Mode.rainbow;
-  //   System.out.println("Rainbow");
-  //   m_led.setData(m_ledBuffer);
-  // }
-
   public void CoralSensed(){
     LED_Mode = Mode.Coral;
     m_led.setData(m_ledBuffer);

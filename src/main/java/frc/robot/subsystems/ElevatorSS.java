@@ -29,9 +29,6 @@ public class ElevatorSS extends SubsystemBase{
     private double p = 0.96; //0.75, newer 0.9
     private double i = 0;
     private double d = 0.02;
-    // private double p = 2.5;
-    // private double i;
-    // private double d = 0.0005;
 
     public ElevatorSS(){
         m_leadElevatorMotor = new TalonFX(ElevatorConstants.Elevator_Lead_Motor_ID);

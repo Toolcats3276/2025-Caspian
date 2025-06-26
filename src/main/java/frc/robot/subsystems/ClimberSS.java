@@ -22,7 +22,6 @@ public class ClimberSS extends SubsystemBase {
   private DigitalInput ClimbLeftLimitSwitch;
   private DigitalInput ClimbRightLimitSwitch;
 
-
   /** Creates a new ClimberSS. */
   public ClimberSS() {
 
@@ -46,8 +45,6 @@ public class ClimberSS extends SubsystemBase {
   Mode ClimberMode = Mode.ManualStop;
 
   @Override
-
-
   public void periodic() {
 
     switch(ClimberMode) {
@@ -61,13 +58,6 @@ public class ClimberSS extends SubsystemBase {
         else{
           m_climberMotor.set(-ClimberConstants.MANUAL_SPEED);
         }
-        // else if(returnLeftClimbLimit() && !returnRightClimbLimit()){
-        //   m_climberMotor.set(-ClimberConstants.MANUAL_SPEED);
-
-        // }
-        // else if(returnRightClimbLimit() && !returnLeftClimbLimit()){
-        //   m_climberMotor.set(-ClimberConstants.MANUAL_SPEED);
-        // }
         break;
       }
 
@@ -102,7 +92,6 @@ public class ClimberSS extends SubsystemBase {
   public void ManualStop(){
       ClimberMode = Mode.ManualStop;
   }
-
 
   public void setSpeed(double speed){
     this.speed = speed;

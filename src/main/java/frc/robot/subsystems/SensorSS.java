@@ -204,16 +204,6 @@ public class SensorSS extends SubsystemBase{
     }
 
 
-
-
-
-
-
-
-
-
-
-
     public void setEndCoralInfeedCommand(boolean endCommand){
         this.endCommand = endCommand;
     }

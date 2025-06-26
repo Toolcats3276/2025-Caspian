@@ -13,7 +13,8 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class TeleopSwerve extends Command {    
+public class TeleopSwerve extends Command {  
+
     private SwerveSS s_Swerve;  
     private ArmSS s_Arm;
     private ElevatorSS s_Elevator;
@@ -26,7 +27,6 @@ public class TeleopSwerve extends Command {
     private BooleanSupplier top;
     private BooleanSupplier bottom;
     
-
     public TeleopSwerve(SwerveSS s_Swerve, ArmSS s_Arm, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier alignLeft, BooleanSupplier alignRight, BooleanSupplier top, BooleanSupplier bottom, ElevatorSS s_Elevator) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
@@ -122,11 +122,6 @@ public class TeleopSwerve extends Command {
 
         SmartDashboard.putBoolean("Align Left", alignLeft.getAsBoolean());
         SmartDashboard.putBoolean("Align Right", alignRight.getAsBoolean());
-
-        // if(DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
-        //     translationVal = -translationVal;
-        //     strafeVal = -strafeVal;
-        // }
 
         /* Drive */
         s_Swerve.drive(
