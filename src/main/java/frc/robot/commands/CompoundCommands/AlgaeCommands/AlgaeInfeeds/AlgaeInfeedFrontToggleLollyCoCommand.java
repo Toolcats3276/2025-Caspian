@@ -1,6 +1,8 @@
 
 package frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.ElevatorConstants;
@@ -8,6 +10,7 @@ import frc.robot.Constants.WristConstants;
 import frc.robot.commands.BaseCommands.ArmCommands.ArmPIDCommand;
 import frc.robot.commands.BaseCommands.ElevatorCommands.ElevatorPIDCommand;
 import frc.robot.commands.BaseCommands.WristCommands.WristPIDCommand;
+import frc.robot.commands.CompoundCommands.AlgaeCommands.ScoringCommands.ProcessorCoCommand;
 import frc.robot.subsystems.ArmSS;
 import frc.robot.subsystems.ElevatorSS;
 import frc.robot.subsystems.InfeedSS;
@@ -19,23 +22,28 @@ public class AlgaeInfeedFrontToggleLollyCoCommand extends SequentialCommandGroup
     private boolean endCommand = false;
 
 
-    public AlgaeInfeedFrontToggleLollyCoCommand(ArmSS s_Arm, InfeedSS s_Infeed, WristSS s_Wrist, ElevatorSS s_Elevator, SensorSS s_Sensor) {
+    public AlgaeInfeedFrontToggleLollyCoCommand(ArmSS s_Arm, InfeedSS s_Infeed, WristSS s_Wrist, ElevatorSS s_Elevator, SensorSS s_Sensor, BooleanSupplier AlgaeInfeed) {
 
         addCommands(
             new RepeatCommand(
                 
                 new ConditionalCommand(
                     //on true
-                    new ParallelCommandGroup(
+                    new ConditionalCommand(  
+                        new ProcessorCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed),     
+
+                        new ParallelCommandGroup(
                         new SequentialCommandGroup(
                             new WaitCommand(0.2),
                             new ElevatorPIDCommand(s_Elevator, ElevatorConstants.COMP, ElevatorConstants.MAX_PID_OUTPUT)
                         ),
                         new ArmPIDCommand(s_Arm, ArmConstants.COMP, ArmConstants.MAX_PID_OUTPUT),
                         new WristPIDCommand(s_Wrist, WristConstants.COMP, WristConstants.ALGAE_INFEED_PID_OUTPUT),
-                        new InstantCommand(() -> s_Infeed.setVoltage(1))
-                    ),
-                    
+                        new InstantCommand(() -> s_Infeed.setVoltage(1)),
+                        new InstantCommand(() -> endCommand = true)
+                        ),
+
+                    AlgaeInfeed),
 
                     //on false
                         new ParallelCommandGroup(

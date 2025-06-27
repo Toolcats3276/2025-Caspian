@@ -94,7 +94,7 @@ public class SwerveSS extends SubsystemBase {
             
             LLTranslationBR = new PIDController(0.015, 0, 0);
             LLStrafeBR = new PIDController(0.007, 0, 0);
-            LLTranslationBL = new PIDController(0.012, 0, 0);
+            LLTranslationBL = new PIDController(0.02, 0, 0);
             LLStrafeBL = new PIDController(0.004, 0, 0);
             LLHeadingRotationB = new PIDController(0.014,0,0);
     
@@ -334,13 +334,18 @@ public class SwerveSS extends SubsystemBase {
             LLRotation = 120;
         }
         else if(LLAssistantFR.getFiducialID() == 10){
-            LLRotation = 180;
+            if (getHeading().getDegrees() < 0) {
+                LLRotation = -180;
+            }
+            else {
+                LLRotation = 180;
+            }
         }
         else if(LLAssistantFR.getFiducialID() == 11){
             LLRotation = -120;
         }
         else if(LLAssistantFR.getFiducialID() == 17){
-            LLRotation = -60;
+            LLRotation = 60;
         }
         else if(LLAssistantFR.getFiducialID() == 18){
             LLRotation = 0;
@@ -350,6 +355,14 @@ public class SwerveSS extends SubsystemBase {
         }
         else if(LLAssistantFR.getFiducialID() == 20){
             LLRotation = -120;
+        }
+        else if(LLAssistantFL.getFiducialID() == 21){
+            if (getHeading().getDegrees() < 0) {
+                LLRotation = -180;
+            }
+            else {
+                LLRotation = 180;
+            }
         }
         else if(LLAssistantFR.getFiducialID() == 22){
             LLRotation = 120;
@@ -477,13 +490,18 @@ public class SwerveSS extends SubsystemBase {
             LLRotation = 120;
         }
         else if(LLAssistantFL.getFiducialID() == 10){
-            LLRotation = 180;
+            if (getHeading().getDegrees() < 0) {
+                LLRotation = -180;
+            }
+            else {
+                LLRotation = 180;
+            }
         }
         else if(LLAssistantFL.getFiducialID() == 11){
             LLRotation = -120;
         }
         else if(LLAssistantFL.getFiducialID() == 17){
-            LLRotation = -60;
+            LLRotation = 60;
         }
         else if(LLAssistantFL.getFiducialID() == 18){
             LLRotation = 0;
@@ -493,6 +511,14 @@ public class SwerveSS extends SubsystemBase {
         }
         else if(LLAssistantFL.getFiducialID() == 20){
             LLRotation = -120;
+        }
+        else if(LLAssistantFL.getFiducialID() == 21){
+            if (getHeading().getDegrees() < 0) {
+                LLRotation = -180;
+            }
+            else {
+                LLRotation = 180;
+            }
         }
         else if(LLAssistantFL.getFiducialID() == 22){
             LLRotation = 120;
@@ -614,19 +640,19 @@ public class SwerveSS extends SubsystemBase {
             }
         }
         else if(LLAssistantBR.getFiducialID() == 8){
-            LLRotation = 120;
+            LLRotation = -120;
         }
         else if(LLAssistantBR.getFiducialID() == 9){
-            LLRotation = 60;
+            LLRotation = -60;
         }
         else if(LLAssistantBR.getFiducialID() == 10){
             LLRotation = 0;
         }
         else if(LLAssistantBR.getFiducialID() == 11){
-            LLRotation = -60;
+            LLRotation = 60;
         }
         else if(LLAssistantBR.getFiducialID() == 17){
-            LLRotation = -120;
+            LLRotation = 120;
         }
         else if(LLAssistantBR.getFiducialID() == 18){
             if (getHeading().getDegrees() < 0) {
@@ -767,16 +793,16 @@ public class SwerveSS extends SubsystemBase {
             }
         }
         else if(LLAssistantBL.getFiducialID() == 8){
-            LLRotation = 120;
+            LLRotation = -120;
         }
         else if(LLAssistantBL.getFiducialID() == 9){
-            LLRotation = 60;
+            LLRotation = -60;
         }
         else if(LLAssistantBL.getFiducialID() == 10){
             LLRotation = 0;
         }
         else if(LLAssistantBL.getFiducialID() == 11){
-            LLRotation = -60;
+            LLRotation = 60;
         }
         else if(LLAssistantBL.getFiducialID() == 17){
             LLRotation = -120;

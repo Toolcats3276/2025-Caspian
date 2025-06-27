@@ -43,12 +43,7 @@ public class LEDDefault extends Command {
     }
 
     else if (s_Sensor.coralSensed()) {
-      if(s_Sensor.reefSensed()){
-        s_Led.ReefAligned();
-      }
-      else{
         s_Led.Infeed_Done();
-      }
     }
 
     else if (s_Arm.returnSetPoint() == ArmConstants.COMP && s_Sensor.coralSensed()) {

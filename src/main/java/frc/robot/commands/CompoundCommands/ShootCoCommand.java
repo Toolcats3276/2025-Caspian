@@ -45,12 +45,16 @@ public class ShootCoCommand extends SequentialCommandGroup{
                                     new ConditionalCommand(
                                     /* L3 Front */
                                         new InfeedCommand(s_Infeed, InfeedConstants.L3_SHOT, InfeedConstants.L3_SHOT),
-                                    /* L2 Front */
-                                        new InfeedCommand(s_Infeed, InfeedConstants.CORAL_SHOT, InfeedConstants.CORAL_SHOT),
-                                        () -> s_Arm.returnSetPoint() == ArmConstants.L3_Front),
-                                    () -> s_Arm.returnSetPoint() == ArmConstants.L1_Front),
+                                        /* L2 Front */
+                                            new InfeedCommand(s_Infeed, InfeedConstants.CORAL_SHOT, InfeedConstants.CORAL_SHOT),
 
-                                () -> s_Arm.returnSetPoint() == ArmConstants.COMP),
+                                        () -> s_Arm.returnSetPoint() == ArmConstants.L3_Front
+                                    ),
+                                    () -> s_Arm.returnSetPoint() == ArmConstants.L1_Front
+                                ),
+
+                                () -> s_Arm.returnSetPoint() == ArmConstants.COMP
+                            ),
 
 
                             () -> s_Arm.returnSetPoint() == ArmConstants.L4_Front
@@ -68,8 +72,12 @@ public class ShootCoCommand extends SequentialCommandGroup{
                                 new ConditionalCommand(
                                 /* Processor */
                                     new InfeedCommand(s_Infeed, -InfeedConstants.PROCESSOR_SHOT, -InfeedConstants.PROCESSOR_SHOT),
-                                /* Barge */
-                                    new InfeedCommand(s_Infeed, -InfeedConstants.TELE_BARGE_SHOT, -InfeedConstants.TELE_BARGE_SHOT), 
+                                    new ConditionalCommand(
+                                    /* Barge */
+                                        new InfeedCommand(s_Infeed, -InfeedConstants.TELE_BARGE_SHOT, -InfeedConstants.TELE_BARGE_SHOT), 
+                                    /* Barge Front */
+                                        new InfeedCommand(s_Infeed, -InfeedConstants.BARGE_SHOT_Front, -InfeedConstants.BARGE_SHOT_Front), 
+                                        () -> s_Arm.returnSetPoint() == ArmConstants.BARGE),
                                     () -> s_Arm.returnSetPoint() == ArmConstants.PROCESSOR
                                 ),
                             /* L3 and L2 */

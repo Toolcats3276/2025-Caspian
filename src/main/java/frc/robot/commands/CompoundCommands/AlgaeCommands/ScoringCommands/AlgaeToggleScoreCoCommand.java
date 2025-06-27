@@ -20,11 +20,11 @@ public class AlgaeToggleScoreCoCommand extends SequentialCommandGroup{
         addCommands(
                 new ConditionalCommand(
                     //true  
-                    new ProcessorCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed),
-                    ///false
                     new BargeCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed),
+                    ///false
+                    new FrontBargeCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed),
                     //condition
-                    () -> s_Arm.returnSetPoint() == ArmConstants.BARGE
+                    () -> s_Arm.returnSetPoint() == ArmConstants.BARGE_Front
             )
         );
         addRequirements(s_Wrist, s_Arm, s_Elevator, s_Infeed);

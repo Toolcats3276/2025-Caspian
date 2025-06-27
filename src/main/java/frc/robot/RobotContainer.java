@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -32,6 +33,8 @@ import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.ReefInfeed
 import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.AlgaeInfeedBackToggleCoCommand;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.ScoringCommands.AlgaeToggleScoreCoCommand;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.ScoringCommands.AutoBargeCoCommand;
+import frc.robot.commands.CompoundCommands.AlgaeCommands.ScoringCommands.FrontBargeCoCommand;
+import frc.robot.commands.CompoundCommands.AlgaeCommands.ScoringCommands.ProcessorCoCommand;
 import frc.robot.commands.CompoundCommands.AutoCommands.AutoCoralInfeedSensorCommand;
 import frc.robot.commands.CompoundCommands.Climb.ClimbCoCommand;
 import frc.robot.commands.CompoundCommands.CoralCommands.CoralInfeedCommands.CoralSourceInfeedSensorCoCommand;
@@ -75,6 +78,7 @@ public class RobotContainer {
     private final JoystickButton L4 = new JoystickButton(driver, 7);
     //Barge
     private final JoystickButton Barge = new JoystickButton(driver, 5);
+    private final JoystickButton Barge_Front = new JoystickButton(driver, 14);
     //Feeds
     private final JoystickButton CoralInfeed = new JoystickButton(driver, 3);
     private final JoystickButton AlgaeInfeed = new JoystickButton(driver, 4);
@@ -197,7 +201,8 @@ public class RobotContainer {
         AutoChooser.addOption("Blue Left Ground", new PathPlannerAuto("Blue Left Ground"));
         AutoChooser.addOption("Blue Right Ground", new PathPlannerAuto("Blue Right Ground"));
 
-        SmartDashboard.putData(AutoChooser);   
+        SmartDashboard.putData(AutoChooser); 
+        SmartDashboard.putBoolean("Algae Infeed", AlgaeInfeed.getAsBoolean());  
         
         // Configure the button bindings
         configureButtonBindings();
@@ -218,7 +223,7 @@ public class RobotContainer {
         CoralInfeed.onTrue(new ToggleCoralInfeedStateCoCommand(s_Sensor)
             .finallyDo(() -> new InstantCommand(() -> s_Sensor.setInfeedState(true))));
         //Ground Algae
-        AlgaeInfeed.onTrue(new AlgaeInfeedFrontToggleLollyCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor)
+        AlgaeInfeed.onTrue(new AlgaeInfeedFrontToggleLollyCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor, AlgaeInfeed)
             .finallyDo(() -> new InstantCommand(() -> s_Sensor.setInfeedState(true))));  
         AlgaeInfeed.onTrue(new ToggleCoralInfeedStateCoCommand(s_Sensor)
             .finallyDo(() -> new InstantCommand(() -> s_Sensor.setInfeedState(true))));
@@ -241,6 +246,7 @@ public class RobotContainer {
         L4.onTrue(new L4ToggleCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed));
         //Algae
         Barge.onTrue(new AlgaeToggleScoreCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor, Barge));
+        Barge_Front.onTrue(new FrontBargeCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed));
         //Shoot
         Shoot.onTrue(new ShootCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor));
         //Comp

@@ -67,8 +67,17 @@ public final class Constants {
         public static final double L4 = 0.58;//.583 //0.577
         public static final double L4_Front = 0.535;//.53
 
+
+
+
+
         //Barge
-        public static final double BARGE_Front = 0.59;
+        public static final double BARGE_Front = 0.548;
+
+
+
+
+
         public static final double BARGE = 0.59;
         
         //Processor
@@ -125,7 +134,15 @@ public final class Constants {
 
         //Barge
         public static final double BARGE = 0.54;// 0.495 .5
-        public static final double BARGE_Front = 0.54;// 0.495 .5
+
+
+
+
+        public static final double BARGE_Front = 0.44;
+
+
+
+
         public static final double AUTO_BARGE = 0.495;// 0.48 .5
 
         //Processor
@@ -206,7 +223,22 @@ public final class Constants {
         public static final double PROCESSOR_SHOT = 0.15;
         public static final double TELE_BARGE_SHOT = 0.3;//1 0.65
         public static final double BARGE_SHOT = .16; //0.2
-        public static final double BARGE_SHOT_Front = .16; //0.2
+
+
+
+
+
+
+
+
+        public static final double BARGE_SHOT_Front = .3725; //0.2
+
+
+
+
+
+
+
         public static final double BARGE_SHOT_3 = .18; //0.2
 
         public static final String ALGAE_INFEED_GROUND = "Ground Infeed";
