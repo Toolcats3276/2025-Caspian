@@ -34,20 +34,23 @@ public final class Constants {
 
 
     public static final class ArmConstants{
+        //Ids
+        public static final int ARM_CANCONDER_ID = 4;
         public static final int ARM_LEAD_MOTR_ID = 41;
         public static final int ARM_FOLLOW_MOTOR_ID = 42;
 
-        //Infeeds
+        //Comp
         public static final double COMP = 0.428;
-
+        
+        /* Infeeds */
+        //Coral
         public static final double CORAL_INFEED = 0.345;//.345 before 3/8/25 //0.347 // 3/8/25 3.49 **good 0.345**
         public static final double AUTO_CORAL_INFEED = 0.348;
         public static final double CORAL_SOURCE_INFEED = 0.527;
 
-
+        //Algae
         public static final double ALGAE_INFEED = 0.425;//.425
-        public static final double ALGAE_INFEED_Lollypop = 0.456
-        ;//.4
+        public static final double ALGAE_INFEED_Lollypop = 0.456;//.4
         public static final double ALGAE_INFEED_L1_Front = .53;
         public static final double ALGAE_INFEED_L1 = .586;
         public static final double ALGAE_INFEED_L2_Front = .531;//.531
@@ -67,38 +70,30 @@ public final class Constants {
         public static final double L4 = 0.58;//.583 //0.577
         public static final double L4_Front = 0.535;//.53
 
-
-
-
-
         //Barge
         public static final double BARGE_Front = 0.548;
-
-
-
-
-
         public static final double BARGE = 0.59;
         
         //Processor
         public static final double PREPROCESSOR = 0.427;
         public static final double PROCESSOR = 0.425; 
-
-        public static final double PID_TEST_POINT = .5;
-        public static final double PID_TEST_POINT2 = .37;
-
+        
+        //Climb
         public static final double CLIMB_READY = 0.518; //0.530 
-
         public static final double CLIMBED = 0.43; 
 
-        public static final int ARM_CANCONDER_ID = 4;
-
+        //Test points
+        public static final double PID_TEST_POINT = .5;
+        public static final double PID_TEST_POINT2 = .37;
+        
+        //Outputs
         public static final double MAX_PID_OUTPUT = 1;
         public static final double ALGAE_INFEED_PID_OUTPUT = 0.5;
         public static final double ALGAE_BARGE_PID_OUTPUT = .75;
     }
 
     public static final class WristConstants{
+        //Ids
         public static final int WRIST_MOTOR_ID = 60;
         public static final int WRIST_CANCODER_ID = 6; 
 
@@ -106,11 +101,12 @@ public final class Constants {
         public static final double COMP = 0.776;
         public static final double ALGAE_INFEED_L1_COMP = .58;
 
-        //Infeed
+        /* Infeeds */
+        //Coral
         public static final double CORAL_INFEED = 0.43; // 0.415 //0.42 *good one 0.43*
         public static final double CORAL_SOURCE_INFEED = 0.343;//.336
 
-
+        //Algae
         public static final double ALGAE_INFEED = 0.285;//.4
         public static final double ALGAE_INFEED_Lollypop = 0.337;//.4
         public static final double ALGAE_INFEED_L1 = 0.73;//0.72
@@ -134,23 +130,17 @@ public final class Constants {
 
         //Barge
         public static final double BARGE = 0.54;// 0.495 .5
-
-
-
-
         public static final double BARGE_Front = 0.44;
-
-
-
-
         public static final double AUTO_BARGE = 0.495;// 0.48 .5
 
         //Processor
         public static final double PROCESSOR = 0.38; 
 
-        public static final double PID_TEST_POINT = 0.7;
+        //Test Points
         public static final double PID_TEST_POINT2 = 0.46;
-
+        public static final double PID_TEST_POINT = 0.7;
+        
+        //Outputs
         public static final double MAX_PID_OUTPUT = 0.5;
         public static final double ALGAE_INFEED_PID_OUTPUT = 0.25;
         public static final double BARGE_PID_OUTPUT = 0.15;
@@ -158,12 +148,17 @@ public final class Constants {
     }
 
     public static final class ElevatorConstants{
+        //Ids
         public static final int Elevator_Lead_Motor_ID = 51;
         
+        //Comp
         public static final double COMP = 0.1;
+
+        /* Infeeds */
+        //Coral
         public static final double CORAL_SOURCE_INFEED = 2.55;//2.8
 
-        //Infeed
+        //Algae
         public static final double ALGAE_INFEED_Ground = 0.863;
         public static final double ALGAE_INFEED_Lollypop = 0.5;//.4
         public static final double ALGAE_INFEED_L1 = 1.25;//1.55
@@ -193,60 +188,52 @@ public final class Constants {
         //Processor
         public static final double PROCESSOR = 0.5;
         
+        //Test Points
         public static final double ELEVATOR_TEST_POINT = 9;
         public static final double ELEVATOR_TEST_POINT_2 = 3;
         
+        //OutPuts
         public static final double MAX_PID_OUTPUT = .95; 
         public static final double Elevator_Test_PID_OUTPUT = .85;
     }
 
     public static final class ClimberConstants {
-    
+        //Speed
         public static final double MANUAL_SPEED = 1;
         
     }
 
     public static final class InfeedConstants{
+        //Ids
         public static final int Infeed_Left_Motor_ID = 61;
         public static final int Infeed_Right_Motor_ID = 62;
 
-        public static final double ALGAE_INFEED = 1;
+        /* Infeeds */
+        //Coral
         public static final double LEFT_CORAL_INFEED = 1;
         public static final double RIGHT_CORAL_INFEED = 0.6;  //0.6
-
         public static final double CORAL_SOURCE_INFEED = .25; //0.5
 
+        //Algae
+        public static final double ALGAE_INFEED = 1;
         public static final double IDLE_ALGAE_VOLTAGE = 1.25;
 
+        /* Scoring */
+        //Coral
         public static final double CORAL_SHOT = 0.65;
         public static final double L3_SHOT = 0.4;
+
+        //Algae
         public static final double PROCESSOR_SHOT = 0.15;
         public static final double TELE_BARGE_SHOT = 0.3;//1 0.65
         public static final double BARGE_SHOT = .16; //0.2
-
-
-
-
-
-
-
-
         public static final double BARGE_SHOT_Front = .3725; //0.2
-
-
-
-
-
-
-
         public static final double BARGE_SHOT_3 = .18; //0.2
-
+        
         public static final String ALGAE_INFEED_GROUND = "Ground Infeed";
         public static final String ALGAE_INFEED_Lollypop = "Ground Lollypop";
         public static final String ALGAE_INFEED_L1 = "L1 Infeed";
         public static final String ALGAE_INFEED_L2 = "L2 Infeed";
-
-
     }
 
     public static final class AlignmentConstants{
