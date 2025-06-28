@@ -236,10 +236,6 @@ public final class Constants {
         public static final String ALGAE_INFEED_L2 = "L2 Infeed";
     }
 
-    public static final class AlignmentConstants{
-        // public static final PathConstraints PATHFINDING_CONSTRAINTS = new PathConstraints(4, 10, 10, 10);
-    }
-
     public static final class Swerve {
         public static final int pigeonID = 5;
 
