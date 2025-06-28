@@ -36,6 +36,7 @@ public class ArmSS extends SubsystemBase{
     private double i;
     private double d = 0.005;
 
+    @SuppressWarnings("removal")
     public ArmSS(){
         m_leadArmMotor = new TalonFX(ArmConstants.ARM_LEAD_MOTR_ID);
         m_leadArmMotor.getConfigurator().apply(new TalonFXConfiguration());

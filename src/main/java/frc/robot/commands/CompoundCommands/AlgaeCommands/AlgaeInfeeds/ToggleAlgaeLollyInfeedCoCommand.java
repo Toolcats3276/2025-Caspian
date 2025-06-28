@@ -17,12 +17,12 @@ import frc.robot.subsystems.InfeedSS;
 import frc.robot.subsystems.SensorSS;
 import frc.robot.subsystems.WristSS;
 
-public class AlgaeInfeedFrontToggleLollyCoCommand extends SequentialCommandGroup{
+public class ToggleAlgaeLollyInfeedCoCommand extends SequentialCommandGroup{
 
     private boolean endCommand = false;
 
 
-    public AlgaeInfeedFrontToggleLollyCoCommand(ArmSS s_Arm, InfeedSS s_Infeed, WristSS s_Wrist, ElevatorSS s_Elevator, SensorSS s_Sensor, BooleanSupplier AlgaeInfeed) {
+    public ToggleAlgaeLollyInfeedCoCommand(ArmSS s_Arm, InfeedSS s_Infeed, WristSS s_Wrist, ElevatorSS s_Elevator, SensorSS s_Sensor, BooleanSupplier AlgaeInfeed) {
 
         addCommands(
             new RepeatCommand(

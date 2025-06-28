@@ -67,6 +67,7 @@ public class SwerveSS extends SubsystemBase {
 
     private final SendableChooser<Boolean> FlipAuto;
 
+    @SuppressWarnings("unused")
     private NeutralModeValue driveNeutralMode;
     
     
@@ -281,6 +282,7 @@ public class SwerveSS extends SubsystemBase {
         }
 
 
+    @SuppressWarnings("removal")
     @Override
     public void periodic(){
         swerveOdometry.update(getGyroYaw(), getModulePositions());

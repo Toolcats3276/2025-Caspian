@@ -185,6 +185,7 @@ public class SensorSS extends SubsystemBase{
     }
 
 
+    @SuppressWarnings("unused")
     private boolean validMeasurment(Measurement laserCANMeasurment){
         boolean validMeasurment;
         if(laserCANMeasurment.ambient >= 300 && laserCANMeasurment.status != LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT){

@@ -30,6 +30,7 @@ public class ElevatorSS extends SubsystemBase{
     private double i = 0;
     private double d = 0.02;
 
+    @SuppressWarnings("removal")
     public ElevatorSS(){
         m_leadElevatorMotor = new TalonFX(ElevatorConstants.Elevator_Lead_Motor_ID);
         m_leadElevatorMotor.getConfigurator().apply(new TalonFXConfiguration());

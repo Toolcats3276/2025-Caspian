@@ -11,12 +11,12 @@ import frc.robot.subsystems.InfeedSS;
 import frc.robot.subsystems.SensorSS;
 import frc.robot.subsystems.WristSS;
 
-public class AlgaeInfeedBackToggleCoCommand extends SequentialCommandGroup{
+public class ToggleAlgaeBackInfeedCoCommand extends SequentialCommandGroup{
 
     private boolean endCommand = false;
 
 
-    public AlgaeInfeedBackToggleCoCommand(ArmSS s_Arm, InfeedSS s_Infeed, WristSS s_Wrist, ElevatorSS s_Elevator, SensorSS s_Sensor) {
+    public ToggleAlgaeBackInfeedCoCommand(ArmSS s_Arm, InfeedSS s_Infeed, WristSS s_Wrist, ElevatorSS s_Elevator, SensorSS s_Sensor) {
 
         addCommands(
             new RepeatCommand(

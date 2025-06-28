@@ -29,6 +29,7 @@ public class WristSS extends SubsystemBase{
     private PIDController pidController;
 
 
+    @SuppressWarnings("removal")
     public WristSS(){
         m_leadWristMotor = new TalonFX(WristConstants.WRIST_MOTOR_ID);
         m_leadWristMotor.getConfigurator().apply(new TalonFXConfiguration());

@@ -153,9 +153,6 @@ public class LEDSS extends SubsystemBase{
               else if (alliance.get() == DriverStation.Alliance.Red) {
                 m_ledBuffer.setLED(i, Color.kRed);
               } 
-              else {
-                m_ledBuffer.setLED(i, Color.kWhite);
-              }  
           }
         }
 

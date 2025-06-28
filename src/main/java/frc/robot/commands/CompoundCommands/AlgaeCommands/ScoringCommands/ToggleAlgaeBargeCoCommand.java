@@ -11,11 +11,11 @@ import frc.robot.subsystems.InfeedSS;
 import frc.robot.subsystems.SensorSS;
 
 
-public class AlgaeToggleScoreCoCommand extends SequentialCommandGroup{
+public class ToggleAlgaeBargeCoCommand extends SequentialCommandGroup{
 
 
 
-    public AlgaeToggleScoreCoCommand(WristSS s_Wrist, ArmSS s_Arm, ElevatorSS s_Elevator, InfeedSS s_Infeed, SensorSS s_Sensor, BooleanSupplier  endcommand) {
+    public ToggleAlgaeBargeCoCommand(WristSS s_Wrist, ArmSS s_Arm, ElevatorSS s_Elevator, InfeedSS s_Infeed, SensorSS s_Sensor, BooleanSupplier  endcommand) {
 
         addCommands(
                 new ConditionalCommand(

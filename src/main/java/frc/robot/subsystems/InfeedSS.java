@@ -23,6 +23,7 @@ public class InfeedSS extends SubsystemBase{
     private double left_Speed;
     private double right_Speed;
 
+    @SuppressWarnings("removal")
     public InfeedSS(){
         m_infeedMotorLeft = new TalonFX(InfeedConstants.Infeed_Left_Motor_ID);
         m_infeedMotorLeft.getConfigurator().apply(new TalonFXConfiguration());

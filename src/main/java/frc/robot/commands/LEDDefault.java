@@ -10,6 +10,7 @@ import frc.robot.subsystems.LEDSS;
 import frc.robot.subsystems.SensorSS;
 import frc.robot.subsystems.SwerveSS;
 
+@SuppressWarnings("unused")
 public class LEDDefault extends Command {
   private LEDSS s_Led;
   private SensorSS s_Sensor;
