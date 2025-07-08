@@ -22,16 +22,13 @@ public class ToggleAlgaeLollyInfeedCoCommand extends SequentialCommandGroup{
     private boolean endCommand = false;
 
 
-    public ToggleAlgaeLollyInfeedCoCommand(ArmSS s_Arm, InfeedSS s_Infeed, WristSS s_Wrist, ElevatorSS s_Elevator, SensorSS s_Sensor, BooleanSupplier AlgaeInfeed) {
+    public ToggleAlgaeLollyInfeedCoCommand(ArmSS s_Arm, InfeedSS s_Infeed, WristSS s_Wrist, ElevatorSS s_Elevator, SensorSS s_Sensor) {
 
         addCommands(
             new RepeatCommand(
                 
                 new ConditionalCommand(
                     //on true
-                    new ConditionalCommand(  
-                        new ProcessorCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed),     
-
                         new ParallelCommandGroup(
                         new SequentialCommandGroup(
                             new WaitCommand(0.2),
@@ -39,12 +36,8 @@ public class ToggleAlgaeLollyInfeedCoCommand extends SequentialCommandGroup{
                         ),
                         new ArmPIDCommand(s_Arm, ArmConstants.COMP, ArmConstants.MAX_PID_OUTPUT),
                         new WristPIDCommand(s_Wrist, WristConstants.COMP, WristConstants.ALGAE_INFEED_PID_OUTPUT),
-                        new InstantCommand(() -> s_Infeed.setVoltage(1)),
-                        new InstantCommand(() -> endCommand = true)
+                        new InstantCommand(() -> s_Infeed.setVoltage(1))
                         ),
-
-                    AlgaeInfeed),
-
                     //on false
                         new ParallelCommandGroup(
                             new InstantCommand(() -> endCommand = false),

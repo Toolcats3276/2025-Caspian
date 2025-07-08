@@ -32,6 +32,7 @@ import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.ReefInfeed
 import frc.robot.commands.CompoundCommands.AlgaeCommands.AlgaeInfeeds.ToggleAlgaeBackInfeedCoCommand;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.ScoringCommands.ToggleAlgaeBargeCoCommand;
 import frc.robot.commands.CompoundCommands.AlgaeCommands.ScoringCommands.AutoBargeCoCommand;
+import frc.robot.commands.CompoundCommands.AlgaeCommands.ScoringCommands.ProcessorCoCommand;
 import frc.robot.commands.CompoundCommands.AutoCommands.AutoCoralInfeedSensorCommand;
 import frc.robot.commands.CompoundCommands.Climb.ClimbCoCommand;
 import frc.robot.commands.CompoundCommands.CoralCommands.CoralInfeedCommands.CoralSourceInfeedSensorCoCommand;
@@ -75,6 +76,8 @@ public class RobotContainer {
     private final JoystickButton L4 = new JoystickButton(driver, 7);
     //Barge
     private final JoystickButton Barge = new JoystickButton(driver, 5);
+    //Processor
+    private final JoystickButton Processor = new JoystickButton(driver, 14);
     //Feeds
     private final JoystickButton CoralInfeed = new JoystickButton(driver, 3);
     private final JoystickButton AlgaeInfeed = new JoystickButton(driver, 4);
@@ -218,7 +221,7 @@ public class RobotContainer {
         CoralInfeed.onTrue(new ToggleCoralInfeedStateCoCommand(s_Sensor)
             .finallyDo(() -> new InstantCommand(() -> s_Sensor.setInfeedState(true))));
         //Ground Algae
-        AlgaeInfeed.onTrue(new ToggleAlgaeLollyInfeedCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor, AlgaeInfeed)
+        AlgaeInfeed.onTrue(new ToggleAlgaeLollyInfeedCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor)
             .finallyDo(() -> new InstantCommand(() -> s_Sensor.setInfeedState(true))));  
         AlgaeInfeed.onTrue(new ToggleCoralInfeedStateCoCommand(s_Sensor)
             .finallyDo(() -> new InstantCommand(() -> s_Sensor.setInfeedState(true))));
@@ -241,6 +244,8 @@ public class RobotContainer {
         L4.onTrue(new L4ToggleCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed));
         //Barge
         Barge.onTrue(new ToggleAlgaeBargeCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor, Barge));
+        //Processor
+        Processor.onTrue(new ProcessorCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed));
         //Shoot
         Shoot.onTrue(new ShootCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor));
         //Comp

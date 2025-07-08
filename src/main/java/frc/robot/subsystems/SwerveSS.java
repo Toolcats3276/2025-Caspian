@@ -286,7 +286,8 @@ public class SwerveSS extends SubsystemBase {
     @Override
     public void periodic(){
         swerveOdometry.update(getGyroYaw(), getModulePositions());
-        // updatePoseEstimate();
+        
+        updatePoseEstimate();
 
         // LLPose.setRobotPose(getPose());
         BotPose.setRobotPose(getPose());
@@ -924,166 +925,10 @@ public class SwerveSS extends SubsystemBase {
 
 
 
-    
-    // public void updatePoseEstimate(){
-    //     m_poseEstimator.update(
-    //         getGyroYaw(), 
-    //         getModulePositions());
 
-    //     m_frontLeftLL.updatePoseEstimates();
-    //     m_frontRightLL.updatePoseEstimates();
-    //     m_backLeftLL.updatePoseEstimates();
-    //     m_backRightLL.updatePoseEstimates();
-
-    //     if(!m_frontLeftLL.rejectUpdate()){
-    //         m_poseEstimator.setVisionMeasurementStdDevs(m_frontLeftLL.proportionalVisionStdDevs());
-    //         m_poseEstimator.addVisionMeasurement(m_frontLeftLL.getPoseEstimate(), m_frontLeftLL.getTimestamp());
-    //     }
-
-    //     if(!m_frontRightLL.rejectUpdate()){
-    //         m_poseEstimator.setVisionMeasurementStdDevs(m_frontRightLL.proportionalVisionStdDevs());
-    //         m_poseEstimator.addVisionMeasurement(m_frontRightLL.getPoseEstimate(), m_frontRightLL.getTimestamp());
-    //     }
-
-    //     if(!m_backLeftLL.rejectUpdate()){
-    //         m_poseEstimator.setVisionMeasurementStdDevs(m_backLeftLL.proportionalVisionStdDevs());
-    //         m_poseEstimator.addVisionMeasurement(m_backLeftLL.getPoseEstimate(), m_backLeftLL.getTimestamp());
-    //     }
-
-    //     if(!m_backRightLL.rejectUpdate()){
-    //         m_poseEstimator.setVisionMeasurementStdDevs(m_backRightLL.proportionalVisionStdDevs());
-    //         m_poseEstimator.addVisionMeasurement(m_backRightLL.getPoseEstimate(), m_backRightLL.getTimestamp());
-    //     }
-    // }
-
-    // public void setPathfindingPath() throws FileVersionException, IOException, org.json.simple.parser.ParseException{
-    //     var FID = m_frontLeftLL.getFiducialID();
-
-    //     if(alignLeft.getAsBoolean()){
-    //         // left side paths
-    //         switch((int)FID){
-    //             case 6: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 7: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 8: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 9: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 10: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 11: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 17: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 18: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 19: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 20: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 21: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 22: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-
-    //             default: 
-    //             if(DriverStation.getAlliance().get() == DriverStation.Alliance.Blue){
-    //                 pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //                 System.out.println("Invalid Tag ID " + FID);
-    //             }
-    //             else {
-    //                 pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //                 System.out.println("Invalid Tag ID " + FID);
-    //             }
-    //         }
-    //     }
-    //     else{
-    //         // right side paths
-    //         switch((int)FID){
-    //             case 6: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 7: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 8: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 9: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 10: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 11: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 17: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 18: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 19: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 20: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //             case 21: pathfindToPath = PathPlannerPath.fromPathFile("Test");
-                
-    //             default: 
-    //             if(DriverStation.getAlliance().get() == DriverStation.Alliance.Blue){
-    //                 pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //                 System.out.println("Invalid Tag ID " + FID);
-    //             }
-    //             else {
-    //                 pathfindToPath = PathPlannerPath.fromPathFile("Test");
-    //                 System.out.println("Invalid Tag ID " + FID);
-    //             }
-    //         }
-    //     }
-    // }
-
-    // public PathPlannerPath getPathfindingPath(BooleanSupplier alignLeft){
-    //     this.alignLeft = alignLeft;
-    //     return pathfindToPath;
-    // }
-
-
-
-    // public double getXPoseEstimateError(){
-    //     return Math.abs(m_poseEstimator.getEstimatedPosition().getX() - swerveOdometry.getPoseMeters().getX());
-    // }
-    // public double getYPoseEstimateError(){
-    //     return Math.abs(m_poseEstimator.getEstimatedPosition().getY() - swerveOdometry.getPoseMeters().getY());
-    // }
-    // public double getThetaPoseEstimateError(){
-    //     return Math.abs(m_poseEstimator.getEstimatedPosition().getRotation().getDegrees() - swerveOdometry.getPoseMeters().getRotation().getDegrees());
-    // }
-
-
-    // public Transform2d getTransformationToReef(){
-    //     double tagID;
-    //     Transform2d robotTransform2d;
-    //     // Pose2d rightPose2D = m_RightLimelight.getPoseEstimate();
-        
-    //     // robotTransform2d = LimelightConstants.TAG_6_L_POSE2D.minus(getPoseEstimate());
-
-    //     // if (scoreLeft == true){
-    //     //     if(m_frontLeftLL.getTV()){
-    //     //         tagID = m_frontLeftLL.getFiducialID();
-    //     //         if(tagID == 6){
-    //     //             robotTransform2d = getPoseEstimate().minus(LimelightConstants.TAG_6_L_POSE2D);
-    //     //         }
-    //     //         else if(tagID == 17){
-    //     //             robotTransform2d = getPoseEstimate().minus(LimelightConstants.TAG_17_L_POSE2D);
-    //     //         }
-    //     //         else{
-    //     //             robotTransform2d = new Transform2d();
-    //     //         }
-    //     //     }
-    //     //     else{
-    //     //         robotTransform2d = new Transform2d();
-    //     //     }
-    //     // }
-    //     // else{
-    //     //     robotTransform2d = new Transform2d();
-    //     // }
-
-
-    //     // if (scoreLeft == false){
-    //     //     if(m_RightLimelight.getTV()){
-    //     //         tagID = m_RightLimelight.getFiducialID();
-    //     //         if(tagID == 6){
-    //     //             robotTransform2d = rightPose2D.minus(LimelightConstants.TAG_6_R_POSE2D);
-    //     //         }
-    //     //         else if(tagID == 17){
-    //     //             robotTransform2d = rightPose2D.minus(LimelightConstants.TAG_17_R_POSE2D);
-    //     //         }
-    //     //         else{
-    //     //             robotTransform2d = new Transform2d();
-    //     //         }
-    //     //     }
-    //     //     else{
-    //     //         robotTransform2d = new Transform2d();
-    //     //     }
-    //     // }
-    //     // else{
-    //     //     robotTransform2d = new Transform2d();
-    //     // }
-
-    //     return robotTransform2d;
-
-    // }
-
+    public void updatePoseEstimate(){
+        m_poseEstimator.update(
+            getGyroYaw(), 
+            getModulePositions());
+    }
 }
