@@ -161,7 +161,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("Shoot", new ShootCoCommand(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Sensor));
         //comp
         NamedCommands.registerCommand("Comp", new CompCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor));
-        //Infeeds
+        //Coral Infeeds
         NamedCommands.registerCommand("Infeed", new AutoCoralInfeedSensorCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor)
             .until(() -> AutoCoralInfeedSensorCommand.endCommand));
         NamedCommands.registerCommand("Source Infeed", new CoralSourceInfeedSensorCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor)
@@ -171,9 +171,10 @@ public class RobotContainer {
         //AutoAlign Strafe
         NamedCommands.registerCommand("Strafe Left", new LaserCanAutoScore(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Swerve, s_Sensor, true));
         NamedCommands.registerCommand("Strafe Right", new LaserCanAutoScore(s_Arm, s_Infeed, s_Wrist, s_Elevator, s_Swerve, s_Sensor, false));
-        //Algae Commands
+        //Algae Infeeds
         NamedCommands.registerCommand("Algae L1 Front", new AlgaeInfeedL1FrontSensorCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor));  
-        NamedCommands.registerCommand("Algae L2 Front", new AlgaeInfeedL2SensorFrontCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor));  
+        NamedCommands.registerCommand("Algae L2 Front", new AlgaeInfeedL2SensorFrontCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed, s_Sensor)); 
+        //Barge  
         NamedCommands.registerCommand("Barge", new AutoBargeCoCommand(s_Wrist, s_Arm, s_Elevator, s_Infeed));  
         NamedCommands.registerCommand("Barge Shot", new InfeedCommand(s_Infeed, -InfeedConstants.BARGE_SHOT, -InfeedConstants.BARGE_SHOT));
         NamedCommands.registerCommand("Barge Shot 3", new InfeedCommand(s_Infeed, -InfeedConstants.BARGE_SHOT_3, -InfeedConstants.BARGE_SHOT_3));
