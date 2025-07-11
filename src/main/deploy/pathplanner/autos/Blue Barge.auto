@@ -380,12 +380,6 @@
                     }
                   ]
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Coast"
-                }
               }
             ]
           }

@@ -371,7 +371,7 @@ public class SwerveSS extends SubsystemBase {
             LLRotation = 120;
         }
         else {
-            LLRotation = 0;
+            LLRotation = getHeading().getDegrees();
         }
 
         return LLRotation;
@@ -388,7 +388,7 @@ public class SwerveSS extends SubsystemBase {
             LLStrafeOffSetR = 0;
         }
         else if(LLAssistantFR.getFiducialID() == 9){
-            LLStrafeOffSetR = -0;
+            LLStrafeOffSetR = 0;
         }
         else if(LLAssistantFR.getFiducialID() == 10){
             LLStrafeOffSetR = 0;
@@ -523,7 +523,7 @@ public class SwerveSS extends SubsystemBase {
             LLRotation = 120;
         }
         else {
-            LLRotation = 0;
+            LLRotation = getHeading().getDegrees();
         }
 
         return LLRotation;
@@ -629,6 +629,7 @@ public class SwerveSS extends SubsystemBase {
 
     public double getLLRotationAngleBR(){
         double LLRotation;
+        double storedRotation;
         if(LLAssistantBR.getFiducialID() == 6){
             LLRotation = 120;
         }
@@ -653,7 +654,7 @@ public class SwerveSS extends SubsystemBase {
             LLRotation = 60;
         }
         else if(LLAssistantBR.getFiducialID() == 17){
-            LLRotation = 120;
+            LLRotation = -120;
         }
         else if(LLAssistantBR.getFiducialID() == 18){
             if (getHeading().getDegrees() < 0) {
@@ -669,11 +670,14 @@ public class SwerveSS extends SubsystemBase {
         else if(LLAssistantBR.getFiducialID() == 20){
             LLRotation = 60;
         }
+        else if(LLAssistantBR.getFiducialID() == 21){
+            LLRotation = 0;
+        }
         else if(LLAssistantBR.getFiducialID() == 22){
             LLRotation = -60;
         }
         else {
-            LLRotation = 0;
+            LLRotation = getHeading().getDegrees();
         }
 
         return LLRotation;
@@ -690,7 +694,7 @@ public class SwerveSS extends SubsystemBase {
             LLStrafeOffSetR = 0;
         }
         else if(LLAssistantBR.getFiducialID() == 9){
-            LLStrafeOffSetR = -0;
+            LLStrafeOffSetR = 0;
         }
         else if(LLAssistantBR.getFiducialID() == 10){
             LLStrafeOffSetR = 0;
@@ -749,6 +753,9 @@ public class SwerveSS extends SubsystemBase {
             LLTranslationOffSetR = 0;
         }
         else if(LLAssistantBR.getFiducialID() == 20){
+            LLTranslationOffSetR = 0;
+        }
+        else if(LLAssistantBR.getFiducialID() == 21){
             LLTranslationOffSetR = 0;
         }
         else if(LLAssistantBR.getFiducialID() == 22){
@@ -818,11 +825,14 @@ public class SwerveSS extends SubsystemBase {
         else if(LLAssistantBL.getFiducialID() == 20){
             LLRotation = 60;
         }
+        else if(LLAssistantBL.getFiducialID() == 21){
+            LLRotation = 0;
+        }
         else if(LLAssistantBL.getFiducialID() == 22){
             LLRotation = -60;
         }
         else {
-            LLRotation = 0;
+            LLRotation = getHeading().getDegrees();
         }
 
         return LLRotation;

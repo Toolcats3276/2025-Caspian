@@ -112,6 +112,7 @@ public class RobotContainer {
     //Co Bumpers
     private final JoystickButton SuckIn = new JoystickButton(xboxController, XboxController.Button.kLeftBumper.value);
     private final JoystickButton SuckOut = new JoystickButton(xboxController, XboxController.Button.kRightBumper.value);
+    
 
     /* Subsystems */
     public static final SwerveSS s_Swerve = new SwerveSS();

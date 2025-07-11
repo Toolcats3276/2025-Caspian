@@ -49,7 +49,7 @@ public final class Constants {
         public static final double CORAL_SOURCE_INFEED = 0.527;
 
         //Algae
-        public static final double ALGAE_INFEED = 0.425;//.425
+        public static final double ALGAE_INFEED = 0.42;//.425
         public static final double ALGAE_INFEED_Lollypop = 0.456;//.4
         public static final double ALGAE_INFEED_L1_Front = .53;
         public static final double ALGAE_INFEED_L1 = .586;
@@ -226,7 +226,7 @@ public final class Constants {
         //Algae
         public static final double PROCESSOR_SHOT = 0.15;
         public static final double TELE_BARGE_SHOT = 0.3;//1 0.65
-        public static final double BARGE_SHOT = .16; //0.2
+        public static final double BARGE_SHOT = .15; //0.16
         public static final double BARGE_SHOT_Front = .3725; //0.2
         public static final double BARGE_SHOT_3 = .18; //0.2
         
