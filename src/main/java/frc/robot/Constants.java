@@ -226,9 +226,9 @@ public final class Constants {
         //Algae
         public static final double PROCESSOR_SHOT = 0.15;
         public static final double TELE_BARGE_SHOT = 0.3;//1 0.65
-        public static final double BARGE_SHOT = .15; //0.16
-        public static final double BARGE_SHOT_Front = .3725; //0.2
-        public static final double BARGE_SHOT_3 = .18; //0.2
+        public static final double BARGE_SHOT = .14; //0.16 0.15
+        public static final double BARGE_SHOT_Front = .369; //0.3725
+        public static final double BARGE_SHOT_3 = .19; //0.18
         
         public static final String ALGAE_INFEED_GROUND = "Ground Infeed";
         public static final String ALGAE_INFEED_Lollypop = "Ground Lollypop";

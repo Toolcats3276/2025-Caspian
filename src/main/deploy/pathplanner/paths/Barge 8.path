@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 7.585,
-        "y": 4.863499999999999
+        "y": 4.863
       },
       "prevControl": null,
       "nextControl": {
         "x": 6.8542499999999995,
-        "y": 5.662999999999999
+        "y": 5.6625000000000005
       },
       "isLocked": false,
       "linkedName": null
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 2.0,
-    "rotation": 90.0
+    "rotation": -160.0
   },
   "reversed": false,
   "folder": "Barge Mid",
