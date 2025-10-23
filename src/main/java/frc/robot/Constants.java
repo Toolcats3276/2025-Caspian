@@ -226,7 +226,7 @@ public final class Constants {
         //Algae
         public static final double PROCESSOR_SHOT = 0.15;
         public static final double TELE_BARGE_SHOT = 0.3;//1 0.65
-        public static final double BARGE_SHOT = .14; //0.16 0.15
+        public static final double BARGE_SHOT = .10; //0.16 0.15
         public static final double BARGE_SHOT_Front = .369; //0.3725
         public static final double BARGE_SHOT_3 = .19; //0.18
         
